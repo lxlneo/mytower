@@ -10,17 +10,12 @@ angular.module('BHF')
             replace: true,
             link: function ($scope,$element) {
                 $scope.isshowlist = true;
-
                 $scope.showMemberList = function(){
-
                     $scope.isshowlist = true;
                 }
-
                 $scope.hideMemberList = function(){
-
                     $scope.isshowlist = false;
                 }
-
             }
         }
     })

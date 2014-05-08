@@ -3605,9 +3605,6 @@ src:url(../images/towericon.eot?#iefix) format("embedded-opentype"), url(../imag
 .messages .message .label-attachment {
 	display:none
 }
-.form-new-discussion {
-	display:none
-}
 .form-new-discussion .form-item {
 	margin:0 0 10px 0
 }
