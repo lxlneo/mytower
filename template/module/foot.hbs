@@ -1,0 +1,27 @@
+<script src="http://honey.hunantv.com/honey-2.0/honey.newhunantv.js"></script>
+<script
+        type="text/javascript">
+    honey.config(
+            {
+                'DEV': true,
+                'ROOT': '/js',
+                'PUBROOT': 'http://honey.hunantv.com/honey/src'
+            })
+    honey.go(
+            ['lib:jquery',
+                'lib_angular',
+                'lib_angular-route',
+                'lib_angular-file-upload',
+                'lib_app',
+                'directive_memberlist',
+                'directive_addproform',
+                'controller_index',
+                'controller_addpro',
+                'service_honeyHttpUtils',
+                'service_API'
+            ].join(","),
+            function () {
+                angular.bootstrap(document, ['BHF'])
+            }
+    )
+</script>
