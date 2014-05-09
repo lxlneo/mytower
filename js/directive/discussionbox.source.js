@@ -7,14 +7,10 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope) {
-                $scope.isShowDisForm = false;
+                $scope.showtitle = true;
                 $scope.adddisc = function(){
                     $scope.isShowDisForm = true;
                 }
-                $scope.canceldisc = function(){
-                    $scope.isShowDisForm = false;
-                }
-
             }
         }
     })
