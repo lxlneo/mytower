@@ -3,13 +3,8 @@
 angular.module('BHF')
     .directive('memberlist', function(API){
         var memberList;
-        memberList = [
-            {
-                username: "",
-                realname: "没有成员"
-            }
-        ]
-       /* API.getMemberList().then(
+
+       API.getMemberList().then(
             function (_data) {
                 memberList = _data.items;
             },
@@ -20,7 +15,7 @@ angular.module('BHF')
                         realname: "没有成员"
                     }
                 ]
-            })*/
+            })
 
         return{
             templateUrl: "views/part/memberlist.html",
@@ -28,9 +23,7 @@ angular.module('BHF')
             replace: true,
             link: function ($scope,$element) {
                            $scope.members = memberList;
-
-
-
             }
         }
     })
+git 
