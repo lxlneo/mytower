@@ -28,14 +28,10 @@ angular.module('BHF')
                     method: method || 'GET'
                 }
 
-<<<<<<< HEAD
                 var key = ['params','data'][~~(config.method === 'POST')]
                 config[key] = data
 
-                $http(config).then(function(res){
-=======
                 $http(config).then(function (res) {
->>>>>>> FETCH_HEAD
                     //以后再处理
                     switch (res.status) {
                         case 400:
