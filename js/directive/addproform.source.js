@@ -11,12 +11,23 @@ angular.module('BHF')
                 $scope.tosumbittext = "创建项目";
                 $scope.tosumbit = function () {
                     $scope.tosumbit_text = "正在创建……";
-                    var pro = {}
-                    pro.title = $scope.projectname ||"";
-                    pro.contact = $scope.projectcontact ||"";
-                    pro.description = $scope.projectdesc ||"";
-                    pro.repos = $scope.projectrepos ||"";
-                    API.doAction("project", pro, "POST", function (data) {
+                 /*   var pro = {}
+                    pro.title = $scope.projectname;
+                    pro.contact = $scope.projectcontact;
+                    pro.description = $scope.projectdesc;
+                    pro.repos = $scope.projectrepos;
+                    console.log(pro);*/
+                    var data = {
+                        status: "新建",
+                        "title": "这是一个测试项目",
+                        "description": "项目的介绍",
+                        "contact": "易晓峰",
+                        "start_date":new Date(),
+                        "end_date": new Date(),
+                        "repos": "https://github.com/hunantv-honey-lab/BHF-API"
+                    }
+                    API.doAction("project",data, "POST", function (data) {
+                        console.log("result",data);
                         if (data.id) {
                             $scope.tosumbit_text = "创建成功";
                             $location.path() = "#/index";
