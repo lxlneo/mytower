@@ -1,25 +1,22 @@
 <ul class="todo-new-wrap">
     <li class="todo-form">
-        <button type="button" class="btn btn-mini btn-new-todo" data-url=""
-                data-request-members="02efed7428204733b4cef508f6220b6b">添加新任务
+        <button type="button" class="btn btn-mini btn-new-todo" ng-click="showEditor()">添加新任务
         </button>
     </li>
-    <li class="todo-form new">
-        <form class="form" method="post" data-remote="true" action="/projects/02efed7428204733b4cef508f6220b6b/lists/1e1fad07c250469ba35d43443677bafa/">
-            <div class="form-body">
-                <input type="checkbox" disabled="">
-                <textarea name="todo_content" class="todo-content" placeholder="新的任务" data-validate="custom" data-validate-msg="" data-autosave="list-1e1fad07c250469ba35d43443677bafa-new-todo" style="overflow: hidden; word-wrap: break-word; resize: none; height: 24px;"></textarea>
-                <a href="javascript:;" class="todo-label">
-                    <span class="assignee">未指派</span> ·
-                    <span class="due">没有截止时间</span>
-                </a>
-            </div>
-            <div class="buttons create-buttons">
-                <button type="submit" class="btn btn-primary btn-create-todo" data-disable-with="正在保存...">添加任务</button>
-                <a href="javascript:;" class="btn-cancel-todo">取消</a>
-            </div>
-            <input type="hidden" name="assignee_guid" class="hidden-assignee" value="-1">
-            <input type="hidden" name="due_at" class="hidden-due-date" value="">
-        </form>
+    <li class="todo-form new" ng-show="showform">
+        <div class="form-body">
+            <input type="checkbox" disabled="">
+            <textarea class="todo-content" placeholder="新的任务" style="overflow: hidden; word-wrap: break-word; resize: none; height: 24px;" ng-model="issue"></textarea>
+            <a href="javascript:;" class="todo-label">
+                <span class="assignee">未指派</span> ·
+                <span class="due">没有截止时间</span>
+            </a>
+        </div>
+        <div class="buttons create-buttons">
+            <button type="submit" class="btn btn-primary btn-create-todo" data-disable-with="正在保存..." ng-click="submit()">添加任务</button>
+            <a class="btn-cancel-todo" ng-click="showEditor(false)">取消</a>
+        </div>
+        <input type="hidden" name="assignee_guid" class="hidden-assignee" value="-1">
+        <input type="hidden" name="due_at" class="hidden-due-date" value="">
     </li>
 </ul>

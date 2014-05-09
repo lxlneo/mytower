@@ -7,14 +7,26 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope, $element) {
-                var url = 'project/1/issue'
-                var data = {
-                    status: $element.parent().attr('data-status')
+                var loadIssue = function(){
+                    var url = 'project/' + $scope.router.id + '/issue'
+                    var data = {
+                        undone: true,
+                        limit: 4,
+                        offset: 0,
+                        tag: $element.parent().attr('data-tag')
+                    }
+
+                    API.doAction(url, data, function(data){
+                        $scope.data = data
+                    })
                 }
 
-                API.doAction(url, data, function(data){
-                    $scope.data = data
+                //当issue被保存
+                $scope.$on('issue:save', function(){
+                    loadIssue()
                 })
+
+                loadIssue()
             }
         }
     })

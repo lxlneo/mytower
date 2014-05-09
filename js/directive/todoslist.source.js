@@ -7,7 +7,7 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope) {
-                $scope.todolists = [{name:'bug'},{name:'需求'},{name:'支持'},{name:'功能'}];
+                $scope.tags = ['bug', '需求', '支持', '功能'];
             }
         }
     })
