@@ -1,25 +1,25 @@
 <form class="form form-invite" action="" method="post" data-remote="true" novalidate="">
     <div class="form-item">
         <div class="form-field">
-            <input type="text" name="title" ng-model="project-name" placeholder="项目名称" autofocus="">
+            <input type="text" name="title" required="required" ng-model="projectname" placeholder="项目名称" autofocus="">
         </div>
     </div>
 
     <div class="form-item">
         <div class="form-field">
-            <input type="text" name="contact" ng-model="project-contact" placeholder="联系人" autofocus="">
+            <input type="text" name="contact" required="required" ng-model="projectcontact" placeholder="联系人" autofocus="">
         </div>
     </div>
 
     <div class="form-item">
         <div class="form-field">
-            <input type="text" name="repos" ng-model="project-repos" placeholder="gitlab地址" autofocus="">
+            <input type="text" name="repos" required="required" ng-model="projectrepos" placeholder="gitlab地址" autofocus="">
         </div>
     </div>
 
     <div class="form-item">
         <div class="form-field">
-            <textarea name="description" ng-model="project-desc" placeholder="简单描述项目，便于其他人理解（选填）"
+            <textarea name="description" required="required" ng-model="projectdesc" placeholder="简单描述项目，便于其他人理解（选填）"
                       data-validate="length:1,1000" data-validate-msg="项目描述最长1000个字符"></textarea>
         </div>
     </div>
@@ -89,6 +89,6 @@
            </div>
        </div>-->
     <div class="form-buttons">
-        <button type="submit" ng-model="tosubmit"　ng-click="tosumbit()" class="btn btn-primary" data-success-text="创建成功">创建项目</button>
+        <button type="submit" ng-model="tosumbitbtn" ng-click="tosumbit()" class="btn btn-primary" >{{tosumbittext}}</button>
         <a href="" class="btn btn-x" data-stack="" data-stack-bare="" data-stack-root="">取消</a></div>
 </form>
