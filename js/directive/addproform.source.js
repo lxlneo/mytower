@@ -3,19 +3,25 @@
 angular.module('BHF')
     .directive('addproform', function(API){
 
-
         return{
             templateUrl: "views/part/addproform.html",
             restrict: "E",
             replace: true,
-            link: function ($scope,$element) {
-                $scope.isshowlist = true;
-                $scope.showMemberList = function(){
-                    $scope.isshowlist = true;
+            link:function ($scope,$element) {
+                var pro = {
+                    "title":"",
+                    "description":"",
+                    "contact":"",
+                    "repos":""
                 }
-                $scope.hideMemberList = function(){
-                    $scope.isshowlist = false;
-                }
+                 $scope.tosumbit = function(){
+                   pro.title = $scope.project-title;
+                   pro.contact = $scope.project-contact;
+                   pro.description = $scope.project-desc;
+                   pro.repos = $scope.project-repos;
+                     
+                 }  　　
+
             }
         }
     })
