@@ -1,8 +1,8 @@
 <ul class="todos todos-uncompleted ui-sortable">
     <li ng-repeat="item in data.items" class="todo">
-        <todoaction></todoaction>
+        <todosaction></todosaction>
         <div class="todo-wrap">
-            <input type="checkbox" name="todo-done">
+            <input type="checkbox" name="todo-done" data-id="{{item.id}}" ng-click="finishedIssue($event)">
             <span class="todo-content">
                 <span class="raw"></span>
                 <span>todo内容{{todo}}</span>

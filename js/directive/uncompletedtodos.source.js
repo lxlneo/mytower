@@ -26,6 +26,10 @@ angular.module('BHF')
                     loadIssue()
                 })
 
+                $scope.finishedIssue = function(e){
+
+                }
+
                 loadIssue()
             }
         }
