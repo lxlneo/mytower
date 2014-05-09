@@ -2,16 +2,35 @@
     <!--任务列表 集合-->
     <div ng-repeat="td in todolists" class="todolist">
         <div class="title">
+<<<<<<< HEAD
              <todos_action></todos_action>
             <h4><a href="" class="name" data-stack="true">{{td.name}}</a>
+=======
+             <todosaction></todosaction>
+            <h4><a href="" class="name" data-stack="true">任务列表名称-----{{td.name}}</a>
+>>>>>>> FETCH_HEAD
                 <a href="javascript:;"class="fold">
                     <i class="fa fa-angle-up"></i>
                 </a>
             </h4>
         </div>
+<<<<<<< HEAD
         <div data-status="{{td.name}}">
             <uncompletedtodos></uncompletedtodos>
         </div>
         <add_todo></add_todo>
+=======
+        <!--<p class="todolist-auto-archive-tip">
+            恭喜，任务都已完成：），若无新任务，稍后此列表将被归档，你可以
+            <a href="" class="btn-stick"
+               data-loading="true"
+               data-method="post"
+               data-remote="true"
+               rel="nofollow">取消自动归档
+            </a>
+        </p>-->
+        <uncompletedtodos></uncompletedtodos>
+        <addtodo></addtodo>
+>>>>>>> FETCH_HEAD
     </div>
 </div>
