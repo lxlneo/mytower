@@ -26,4 +26,3 @@ angular.module('BHF')
             }
         }
     })
-git 
