@@ -1,26 +1,8 @@
 <div class="todo-actions actions">
     <div class="inr">
-        <a href="" class="run" data-loading="true" data-method="post"
-           data-remote="true" title="标记成正在进行中">执行</a>
-        <a href=""
-           class="pause"
-           data-loading="true"
-           data-method="post"
-           data-remote="true"
-           title="暂停">暂停
-        </a>
-        <a href=""
-           class="edit"
-           data-request-members="02efed7428204733b4cef508f6220b6b"
-           title="编辑">
-            编辑
-        </a>
-        <a href=""
-           class="del"
-           data-remote="true"
-           data-method="post"
-           data-confirm="确定要删除这条任务吗？"
-           title="删除">删除
-        </a>
+        <a href="" class="run" title="标记成正在进行中" ng-click="clickAction('doing')">执行</a>
+        <a class="pause" ng-click="clickAction('pause')">暂停</a>
+        <a class="edit" title="编辑" ng-click="clickAction('edit')" href="">编辑</a>
+        <a title="删除" class="del" ng-click="clickAction('delete')" href="">删除</a>
     </div>
 </div>

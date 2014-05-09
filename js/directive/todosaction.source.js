@@ -7,7 +7,9 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope) {
-
+                $scope.clickAction = function(action){
+                    $scope.emit('issue:action', action, $scope.item)
+                }
             }
         }
     })
