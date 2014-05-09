@@ -1,42 +1,46 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('addproform', function (API, $location) {
+    .directive('addproform', function (API, $window) {
         return{
             templateUrl: "views/part/addproform.html",
             restrict: "E",
             replace: true,
             link: function ($scope, $element) {
-                console.log(121212);
                 $scope.tosumbittext = "创建项目";
                 $scope.tosumbit = function () {
-                    $scope.tosumbit_text = "正在创建……";
-                 /*   var pro = {}
+                    $scope.tosumbittext = "正在创建……";
+                 var pro = {}
                     pro.title = $scope.projectname;
-                    pro.contact = $scope.projectcontact;
-                    pro.description = $scope.projectdesc;
-                    pro.repos = $scope.projectrepos;
-                    console.log(pro);*/
-                    var data = {
-                        status: "新建",
-                        "title": "这是一个测试项目",
-                        "description": "项目的介绍",
-                        "contact": "易晓峰",
-                        "start_date":new Date(),
-                        "end_date": new Date(),
-                        "repos": "https://github.com/hunantv-honey-lab/BHF-API"
+                    if("" == pro.title || undefined == pro.title){
+                        alert("项目名是必填的.");
+                        return;
                     }
-                    API.doAction("project",data, "POST", function (data) {
-                        console.log("result",data);
+                    pro.contact = $scope.projectcontact;
+                    if("" == pro.contact || undefined == pro.contact){
+                        alert("联系人是必填的.");
+                        return;
+                    }
+                    pro.description = $scope.projectdesc;
+                    if("" == pro.description || undefined == pro.description){
+                        alert("描述是必填的.");
+                        return;
+                    }
+                    pro.repos = $scope.projectrepos;
+                    if("" == pro.repos || undefined == pro.repos){
+                        alert("gitlab地址是必填的.");
+                        return;
+                    }
+
+                    API.doAction("project",pro, "POST", function (data) {
                         if (data.id) {
-                            $scope.tosumbit_text = "创建成功";
-                            $location.path() = "#/index";
+                            $scope.tosumbittext = "创建成功";
+                            $window.location.href = "#/index";
                         } else {
-                            $scope.tosumbit_text = "创建失败！";
+                            $scope.tosumbittext = "创建失败！";
                         }
                     });
                 }  　　
-
             }
         }
     })
