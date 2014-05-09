@@ -27,7 +27,8 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
         $routeProvider.otherwise({      
             redirectTo: '/index'            
         })
-        
+
+        /*
         $httpProvider.defaults.transformRquest = function(obj){
             var str=[];
             for(var p in obj) {
@@ -39,4 +40,5 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
         $httpProvider.defaults.headers.post = {
             'Content-Type': 'application/x-www-form-urlencoded'
         }
+        */
 })
