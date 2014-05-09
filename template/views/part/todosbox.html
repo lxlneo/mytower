@@ -1,0 +1,29 @@
+
+
+
+    <div class="todos-all">
+        <h3>
+            <!--任务标题-->
+            <a class="title" href="" data-stack="">任务</a>
+            <a href="javascript:;" class="btn btn-mini btn-new-todolist">添加任务列表</a>
+        </h3>
+        <div class="todolists-wrap">
+            <div class="todolist-form new" ng-show="isShowTodolistForm">
+                <form class="form" method="post" action="" data-remote="true">
+                    <input type="text" class="todolist-name"name="todolist_name"placeholder="任务列表名称">
+                    <textarea class="todolist-desc" name="todolist_desc" placeholder="补充说明（可选）"></textarea>
+                    <p class="form-buttons">
+                        <button type="submit" class="btn btn-create-todolist btn-primary" data-disable-with="正在保存...">
+                            保存，开始添加任务
+                        </button>
+                        <button type="button" class="btn btn-x btn-cancel-todolist">取消</button>
+                    </p>
+                </form>
+            </div>
+            <!--任务列表集合-->
+            <todoslist></todoslist>
+        </div>
+        <div class="todolists-completed-wrap">
+            <div class="todo-history-link"><a href="" data-stack="">所有已完成任务</a></div>
+        </div>
+    </div>

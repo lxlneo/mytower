@@ -1,0 +1,27 @@
+<ul class="todos todos-uncompleted ui-sortable">
+    <li ng-repeat="todo in todos" class="todo" data-guid=" " data-sort=" "
+        data-sequence-mine=" " data-sort-url="/"
+        data-project-guid="" data-project-name=" "
+        data-updated-at="">
+        <todoaction></todoaction>
+        <div class="todo-wrap">
+            <input type="checkbox" name="todo-done">
+            <span class="todo-content">
+                <span class="raw"></span>
+                <span>todo内容{{todo}}</span>
+                <a href="" data-stack="">issue的测试用例</a>
+             </span>
+            <a class="label todo-assign-due"
+               href="javascript:;"
+               data-request-members="02efed7428204733b4cef508f6220b6b">
+                <span class="assignee" data-guid="d2a7ff82d9f54eb696b6ad2a01402be5">username</span>
+            </a>
+            <a href=""
+               class="label todo-proj"
+               data-stack-root="true"
+               data-stack="true"
+               title="BHF - BHF-API测试用例">BHF - BHF-API...
+            </a>
+        </div>
+    </li>
+</ul>
