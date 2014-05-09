@@ -6,14 +6,12 @@ angular.module('BHF')
             templateUrl: "views/part/dislist.html",
             restrict: "E",
             replace: true,
-            link: function ($scope) {
-                var list = new Array();
-                for (var i = 0; i < 10; i++) {
-                    var obj = new Object();
-                    obj.name = "name"+i;
-                    list.push(obj);
-                }
-                $scope.msglist = list;
+            link: function ($scope, $routeParams) {
+                var api = 'project/' + $scope.router.id + '/comment'
+                var data = {limit: 10}
+                API.doAction(api, data, function(data){
+                    $scope.data = data;
+                })
             }
         }
     })
