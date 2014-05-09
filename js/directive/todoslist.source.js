@@ -3,11 +3,11 @@
 angular.module('BHF')
     .directive('todoslist', function(API){
         return{
-            templateUrl: "views/part/todoslist.html",
+            templateUrl: "views/part/todos_list.html",
             restrict: "E",
             replace: true,
             link: function ($scope) {
-                $scope.todolists = ["A","B"];
+                $scope.todolists = [{name:'bug'},{name:'需求'},{name:'支持'},{name:'功能'}];
             }
         }
     })
