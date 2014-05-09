@@ -3,6 +3,7 @@
 angular.module('BHF')
     .factory('honeyHttpUtils', function ($http, $q, $timeout) {
         var root = "/api/",
+            host = '/api/',
             canceler;
 
         //执行ajax操作
