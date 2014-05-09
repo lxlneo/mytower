@@ -30,6 +30,7 @@ angular.module('BHF')
 
                 var key = ['params', 'data'][~~(config.method === 'POST')]
                 config[key] = data
+
                 $http(config).then(function (res) {
                     //以后再处理
                     switch (res.status) {
