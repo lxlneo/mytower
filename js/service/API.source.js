@@ -25,9 +25,11 @@ angular.module('BHF')
 
                 var config = {
                     url: url,
-                    method: method || 'GET',
-                    data: data
+                    method: method || 'GET'
                 }
+
+                var key = ['params','data'][~~(config.method === 'POST')]
+                config[key] = data
 
                 $http(config).then(function(res){
                     //以后再处理
