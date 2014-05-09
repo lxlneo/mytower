@@ -6,7 +6,11 @@ angular.module('BHF')
             templateUrl: "views/part/disdetailform.html",
             restrict: "E",
             replace: true,
-            link: function ($scope) {
+            link: function ($scope,$element) {
+                var textarea =  $element.find('textarea');
+                var editor = new Simditor({
+                    textarea: textarea
+                });
 
             }
         }
