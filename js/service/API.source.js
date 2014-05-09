@@ -28,7 +28,7 @@ angular.module('BHF')
                     method: method || 'GET',
                     data: data
                 }
-                 console.log(config);
+
                 $http(config).then(function(res){
                     //以后再处理
                     switch(res.status){
