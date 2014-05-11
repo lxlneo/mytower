@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('discussionlist', function(API){
+    .directive('filelist', function(API){
         return{
             templateUrl: "views/part/dislist.html",
             restrict: "E",

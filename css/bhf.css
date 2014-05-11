@@ -5741,8 +5741,8 @@ src:url(../images/towericon.eot?#iefix) format("embedded-opentype"), url(../imag
  */
 @font-face {
 font-family:'FontAwesome';
-src:url(../images/fontawesome-webfont.eot?v=4.0.3);
-src:url(../images/fontawesome-webfont.eot?#iefix&v=4.0.3) format("embedded-opentype"), url(../images/fontawesome-webfont.woff?v=4.0.3) format("woff"), url(../images/fontawesome-webfont.ttf?v=4.0.3) format("truetype"), url(../images/fontawesome-webfont.svg?v=4.0.3#fontawesomeregular) format("svg");
+src:url(../images/fontawesome-webfont.eot);
+src:url(../images/fontawesome-webfont.eot) format("embedded-opentype"), url(../images/fontawesome-webfont.woff) format("woff"), url(../images/fontawesome-webfont.ttf) format("truetype"), url(../images/fontawesome-webfont.svg#fontawesomeregular) format("svg");
 font-weight:normal;
 font-style:normal
 }

@@ -6,19 +6,40 @@
     </div>
     <div class="form-item" type="content">
         <div class="form-field">
-            <textarea tabindex="1" name="content" ng-model="content" id="txt-content" placeholder="说点什么..."  data-validate="custom"></textarea>
+            <simditor></simditor>
         </div>
     </div>
-    <div class="form-item" type="title">
-        <div class="form-field">
-            TAG:
-            <select ng-model="tag" name="tag">
-                <option value="bug">bug</option>
-                <option value="需求">需求</option>
-                <option value="支持">支持</option>
-                <option value="功能">功能</option>
-            </select>
-        </div>
+    <div class="form-item">
+    <div class="form-field">
+
+        <ul class="member-list">
+            <li>
+                <label>
+                    <span>TAG:</span>
+                </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="tag" ng-model="tag" tabindex="-1" value="bug">
+                    <span title="bug">bug</span> </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="tag" ng-model="tag" tabindex="-1" value="需求">
+                    <span title="需求">需求</span> </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="tag" ng-model="tag" tabindex="-1" value="支持">
+                    <span title="支持">支持</span> </label>
+            </li>
+            <li>
+                <label>
+                    <input type="radio" name="tag" ng-model="tag" tabindex="-1" value="功能">
+                    <span title="功能">功能</span> </label>
+            </li>
+        </ul>
+    </div>
     </div>
     <div class="form-buttons">
         <button tabindex="1" class="btn btn-primary" id="btn-post" ng-model="discsumbit" ng-click="tosumbitdisc()" type="submit" data-disable-with="正在提交...">发起讨论</button>

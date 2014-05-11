@@ -1,9 +1,9 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('discussionlist', function(API){
+    .directive('doclist', function(API){
         return{
-            templateUrl: "views/part/dislist.html",
+            templateUrl: "views/part/doclist.html",
             restrict: "E",
             replace: true,
             link: function ($scope, $routeParams) {

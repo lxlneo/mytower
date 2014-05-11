@@ -11,19 +11,42 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
                 templateUrl: "views/addpro.html",
                 controller: "C_addpro"
             })
-            .when('/report', {
-                templateUrl: "views/report.html",
-                controller: "C_report"
-            })
             .when('/project/:id', {
                 templateUrl: "views/project.html",
                 controller: "C_project"
+            })
+            .when('/disfulllist/:id', {
+                templateUrl: "views/dis_full_list.html",
+                controller: "C_dis_full_list"
+            })
+            .when('/issue/:issue_id/comment/:item_id', {
+                templateUrl: "views/dis_single_page.html",
+                controller: "C_dis_single_page"
             })
             .when('/projectsort/:sort', {
                 templateUrl: "views/project-sort.html",
                 controller: "C_project_sort"
             })
-
+            .when('/report', {
+                templateUrl: "views/report.html",
+                controller: "C_report"
+            })
+            .when('/filelist/:pid', {
+                templateUrl: "views/file_full_list.html",
+                controller: "C_file_full_list"
+            })
+            .when('/doclist/:pid', {
+                templateUrl: "views/doc_full_list.html",
+                controller: "C_doc_full_list"
+            })
+            .when('/docsingle/:pid', {
+                templateUrl: "views/doc_singlel_page.html",
+                controller: "C_doc_single_page"
+            })
+            .when('/report', {
+                templateUrl: "views/report.html",
+                controller: "C_report"
+            })
         $routeProvider.otherwise({      
             redirectTo: '/index'            
         })
