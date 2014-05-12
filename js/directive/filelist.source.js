@@ -3,7 +3,7 @@
 angular.module('BHF')
     .directive('filelist', function(API){
         return{
-            templateUrl: "views/part/dislist.html",
+            templateUrl: "views/part/filelist.html",
             restrict: "E",
             replace: true,
             link: function ($scope, $routeParams) {
