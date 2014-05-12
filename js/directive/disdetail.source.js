@@ -7,6 +7,7 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope,$element) {
+                $scope.project_id = $scope.router.id;
                 $scope.isShowDisForm = false;
                 $scope.canceldisc = function(){
                     $scope.isShowDisForm = false;
@@ -20,7 +21,7 @@ angular.module('BHF')
                     $scope.$broadcast('simditor:getvalue');
                     var data = {};
                     data.title = $scope.title;
-                    data.tag = $scope.tag;
+                    data.tag = 'project';
                     data.contnet = $scope.simditorvalue;
                     if("" == data.title||undefined==data.title){
                         alert("标题必填哦~");
@@ -30,12 +31,10 @@ angular.module('BHF')
                         alert("内容必填哦~");
                         return;
                     }
-                    if("" == data.tag||undefined==data.tag){
-                        alert("标签必填哦~");
-                        return;
-                    }
-                    console.log(data);
-                    //API.doAction("project",data,"POST",function(){})
+                    var url = "project/"+$scope.project_id+"/issue"
+                    API.doAction(url,data,"POST",function(data){
+
+                    })
                 }
             }
         }

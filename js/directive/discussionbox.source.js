@@ -7,7 +7,6 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope) {
-                $scope.showtitle = true;
                 $scope.adddisc = function(){
                     $scope.isShowDisForm = true;
                 }
