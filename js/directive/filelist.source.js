@@ -10,6 +10,7 @@ angular.module('BHF')
                 var api = 'project/' + $scope.router.id + '/comment';
                 $scope.project_id = $scope.router.id;
                 var data = {limit: 6}
+
                 API.doAction(api, data, function(data){
                     $scope.data = data;
                 })
