@@ -9,7 +9,6 @@ angular.module('BHF')
             link: function ($scope,$element) {
                   var url = "project/"+ $rootScope.project_id;
                   API.doAction(url,{},'GET',function(data){
-                        console.log(data);
                         $scope.project = data;
                   });
                 }
