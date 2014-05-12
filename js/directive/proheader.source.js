@@ -7,7 +7,7 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope,$element) {
-                  var url = "project/"+ $rootScope.project_id;
+                  var url = "project/"+$rootScope.project_id;
                   API.doAction(url,{},'GET',function(data){
                         $scope.project = data;
                   });

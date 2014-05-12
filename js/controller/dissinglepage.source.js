@@ -1,21 +1,34 @@
 'use strict'
 
 angular.module('BHF')
-    .controller('C_dis_single_page', function ($scope, $routeParams, API) {
-
-        var comm = {
-                type: "bug",
-                target_id: 1,
-                creator: 1,
-                content: "what you saied",
-                timestamp: new Date(),
-                parent_id: 1
-            },
-            data = {};
-            data.items = [];
-        for (var i = 0; i < 6; i++) {
-            var obj = angular.extend({}, comm, {'content': "what you saied" + i});
-            data.items.push(obj);
+    .controller('C_dis_single_page', function ($scope, $routeParams, $rootScope, API) {
+        var params = $routeParams;
+        $rootScope.project_id = params.project_id;
+        var data = {"limit": 20};
+        var url = "project/" + params.project_id + "/issue/" + params.issue_id;
+        API.doAction(url, {}, "GET", function (_data) {
+            $scope.issue = _data;
+            refresh(data);
+        })
+        //刷新评论列表
+        function refresh(data) {
+            API.doAction(url+"/comment", data, "GET", function (data) {
+                $scope.commits = data.items;
+            })
         }
-        $scope.data = data;
+
+        //提交评论
+        $scope.submitcommit=function(){
+            $scope.simditorvalue = "";
+            //获得值
+            $scope.$broadcast('simditor:getvalue');
+            var _data = {};
+            _data.content = $scope.simditorvalue;
+            API.doAction(url+"/comment",_data,"POST",function(_data){
+                if(_data.id){
+                    $scope.$broadcast('simditor:clean');
+                    refresh(data);
+                }
+            });
+        }
     })

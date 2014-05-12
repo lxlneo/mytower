@@ -6,14 +6,17 @@
         <div class="name">
             <a data-stack="" data-stack-root="" href="/#/member/{{item.creator}}">{{item.realname}}</a>
         </div>
-        <a href="/#/issue/{{item.issue_id}}/comment/{{item.id}}" class="message-link">
+        <a href="/#/issue/{{item.project_id}}/{{item.id}}" class="message-link">
             <span class="message-title">{{item.title}}</span>
             <span class="message-content">{{item.content}}</span>
         </a>
         <span class="time">{{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
         <a data-stack="" href="" class="comments-count"> 1 </a>
     </div>
-    <div class="more">
-        <a href="#/disfulllist/{{project_id}}" class="link-more-topics" data-stack="">全部{{data.pagination.record_count}}条讨论</a>
+    <div class="more" ng-show="show_dis_more">
+        <a href="#/disfulllist/{{project_id}}" class="link-more-topics" data-stack="">全部{{data.pagination.count}}条讨论</a>
+    </div>
+    <div class="more" ng-hide="show_dis_more">
+        <a href="" class="link-more-topics" data-stack="">暂时没有人发表讨论</a>
     </div>
 </div>
