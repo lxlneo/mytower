@@ -3,21 +3,14 @@
         <!--栏目标题-->
         <proheader></proheader>
         <div class="topic">
-            <div class="todolist">
-                <ul class="todos">
-                    <li class="todo completed">
-                        <div class="todo-wrap">
-		                <span class="todo-content">
-                            <span class="raw">10.1.201.77 环境配置</span>
-                            <span>10.1.201.77 环境配置</span>
-		                </span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <div class="project-info">
+            <span>
+                <a href="" data-stack-replace="true" data-stack="true">{{issue.title}}</a>
+            </span>
+        </div>
         </div>
         <div class="comments streams">
-            <div class="comment" ng-repeat="item in data.items track by $index">
+            <div class="comment" ng-repeat="item in commits track by $index">
                 <a class="avatar-wrap" href="/members/d2a7ff82d9f54eb696b6ad2a01402be5/" data-stack="" data-stack-root="">
                     <img class="avatar" src="/images/path.jpg" width="50" height="50">
                 </a>
@@ -28,7 +21,7 @@
                 </div>
                 <div class="comment-main">
                     <div class="info">
-                        <a class="author" href="#">易晓峰</a>
+                        <a class="author" href="#">创建人</a>
                         <a class="create-time">{{item.timestamp |date: 'yyyy-MM-dd hh:mm'}}</a>
                     </div>
                     <div class="comment-content editor-style">
@@ -38,8 +31,7 @@
             </div>
         </div>
         <div class="comment comment-form new">
-            <form class="form form-editor form-new-comment" method="post" data-remote="true"
-                  action="/projects/02efed7428204733b4cef508f6220b6b/todos/eff86d8fd0c745d491a9b4715e33b125/comments">
+            <form class="form form-editor form-new-comment" method="post"action="">
                 <a class="avatar-wrap" href="/members/64f02623b0d44c789294cee0f0cbdb8d">
                     <img class="avatar" width="50" height="50"src="https://avatar.tower.im/123fc3f828944a8a9a32fcc055c536fe">
                 </a>
@@ -50,7 +42,7 @@
                         </div>
                     </div>
                     <div class="form-buttons">
-                        <button tabindex="1" type="submit" class="btn btn-primary btn-create-comment"
+                        <button tabindex="1" type="button" ng-click="submitcommit()" class="btn btn-primary btn-create-comment"
                                 data-disable-with="正在发送...">发表评论
                         </button>
                         <button tabindex="2" type="button" class="btn btn-x btn-cancel-create-comment">取消</button>
