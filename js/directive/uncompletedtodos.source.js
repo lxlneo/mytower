@@ -25,11 +25,8 @@ angular.module('BHF')
                 $scope.$on('issue:save', function(){
                     loadIssue()
                 })
-
                 $scope.finishedIssue = function(e){
-
                 }
-
                 loadIssue()
             }
         }
