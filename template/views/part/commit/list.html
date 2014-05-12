@@ -1,0 +1,15 @@
+<ul class="todos todos-uncompleted ui-sortable">
+    <li ng-repeat="item in commitList.items" class="todo">
+        <div class="todo-wrap">
+            <span class="todo-content">
+                <span class="raw"></span>
+                <a href="#">{{item.message | limitTo : 30}}</a>
+             </span>
+            <a class="label">{{item.sha | limitTo : 10}}</a>
+            <a class="label todo-assign-due">
+                 {{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}
+            </a>
+            <a class="label">{{item.realname}}</a>
+        </div>
+    </li>
+</ul>
