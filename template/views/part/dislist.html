@@ -8,7 +8,7 @@
         </div>
         <a href="/#/issue/{{item.project_id}}/{{item.id}}" class="message-link">
             <span class="message-title">{{item.title}}</span>
-            <span class="message-content">{{item.content | trustAsHtml}}</span>
+            <span class="message-content">{{item.content}}</span>
         </a>
         <span class="time">{{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
         <a data-stack="" href="" class="comments-count"> 1 </a>
