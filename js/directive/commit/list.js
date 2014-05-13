@@ -7,9 +7,16 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope, $routeParams) {
-                var api = 'project/' + $scope.router.id + '/commit';
-                $scope.project_id = $scope.router.id;
+                console.log($scope)
+                var api = 'project/' + $scope.project.id + '/commit';
                 var cond = {limit: 5}
+                if($scope.issue){
+                    cond.limit = 9999
+                    api += '/' + $scope.issue.id
+                }else{
+
+                }
+
 
                 API.doAction(api, cond, function(data){
                     $scope.commitList = data;
