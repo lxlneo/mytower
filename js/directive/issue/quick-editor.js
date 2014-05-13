@@ -9,7 +9,7 @@ angular.module('BHF')
             link: function ($scope, $el) {
                 $scope.newissue = true;
                 $scope.new_issue_btn = "添加新任务";
-                $scope.issue_obj = {};
+               var issue_obj = {};
                 //显示编辑器
                 $scope.showEditor = function(display){
                     $scope.showform = display !== undefined ? display : !$scope.showform;
@@ -28,11 +28,11 @@ angular.module('BHF')
                         title: $scope.issue_textarea,
                         tag: $scope.tag
                     }
-                    data = angular.extend($scope.issue_obj,data);
-                    API.doAction(api, data, 'POST', function(data){
+                    data = angular.extend(issue_obj,data);
+                    var method = data.id ? 'PUT' :'POST'
+                    API.doAction(api, data, method, function(data){
                         $scope.$emit('issue:save')
-                        $scope.showform = false;
-
+                        reset_edit();
                     })
                 }
 
@@ -41,11 +41,12 @@ angular.module('BHF')
                     $scope.newissue = false;
                     $scope.new_issue_btn = "保存任务";
                     $scope.issue_textarea = data.title;
-                    $scope.issue_obj = data;
+                    issue_obj = data;
                 })
 
                 function reset_edit(){
                     $scope.issue_textarea = "";
+                    $scope.showform = false;
                 }
             }
         }

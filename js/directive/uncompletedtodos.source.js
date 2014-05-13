@@ -26,11 +26,8 @@ angular.module('BHF')
                 $scope.$on('issue:save', function(){
                     loadIssue()
                 })
-                $scope.finishedIssue = function(){
 
-                }
                 loadIssue();
-
                 $scope.$on('issue:showedit',function(e,data){
                     $scope.$broadcast('issue:filledit',data);
                 })

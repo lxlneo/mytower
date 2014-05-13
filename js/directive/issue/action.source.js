@@ -7,7 +7,6 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope, $element) {
-
                 var issue = $scope.item;
                 var status = issue.status;
                 // 判断状态 doing 正在处理中
