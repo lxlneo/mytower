@@ -3,7 +3,7 @@
 angular.module('BHF')
     .directive('todosaction', function(API){
         return{
-            templateUrl: "views/part/todos_action.html",
+            templateUrl: "views/part/issue/action.html",
             restrict: "E",
             replace: true,
             link: function ($scope) {
