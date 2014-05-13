@@ -19,7 +19,7 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
                 templateUrl: "views/dis_full_list.html",
                 controller: "C_dis_full_list"
             })
-            .when('/issue/:project_id/:issue_id', {
+            .when('/project/:project_id/issue/:issue_id', {
                 templateUrl: "views/dis_single_page.html",
                 controller: "C_dis_single_page"
             })

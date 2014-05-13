@@ -3,7 +3,7 @@
 angular.module('BHF')
     .directive('addproform', function (API, $window) {
         return{
-            templateUrl: "views/part/addproform.html",
+            templateUrl: "views/part/project/editor.html",
             restrict: "E",
             replace: true,
             link: function ($scope, $element) {
