@@ -7,7 +7,7 @@
         <div class="project" ng-repeat="pro in prolist">
             <a title="{{pro.title}}" href="#/project/{{pro.id}}" class="folder c2 i1">
                 <span class="badge"></span>
-                <i class="badge-edit" title="修改项目图标和颜色"></i>
+                <i class="badge-edit del" title="删除项目" data-pid="{{pro.id}}" ng-click="delproject($event)"></i>
             </a>
             <h6 class="name">
                 <a title="{{pro.name}}" data-stack="" data-stack-root="" data-restore-position="" href="＃">{{pro.title}}</a>
