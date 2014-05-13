@@ -4,6 +4,7 @@ angular.module('BHF')
     .controller('C_dis_single_page', function ($scope, $routeParams, $rootScope, API) {
         var params = $routeParams;
         $rootScope.project_id = params.project_id;
+        $rootScope.router = $routeParams
         var data = {"limit": 20};
         var url = "project/" + params.project_id + "/issue/" + params.issue_id;
         API.doAction(url, {}, "GET", function (_data) {
