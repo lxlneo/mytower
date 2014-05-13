@@ -1,0 +1,21 @@
+<div id="page-members" class="page sheet-root">
+    <h2>团队成员列表</h2>
+    <div data-guid="0" class="group group-default ui-droppable">
+        <ul class="members">
+            <li class="member member-invite">
+                <a class="member-link new" href="/#/member/create">
+                    <img alt="添加新成员" src="/images/add_member.png" class="avatar">
+                    <span class="name">添加新成员</span>
+                </a>
+            </li>
+            <li class="member ui-draggable" ng-repeat="item in memberList.items">
+                <a class="member-link" title="{{item.realname}}" href="/member/{{item.id}}">
+                    <img alt="{{item.realname}}" src="/images/path.jpg" class="avatar">
+                    <span class="name">{{item.realname}}</span>
+
+                    <span class="role">{{item.role}}</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -54,6 +54,9 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
             .when('/login', {
                 templateUrl: 'views/part/member/login.html',
                 controller: 'C_login'
+            }).when('/member', {
+                templateUrl: 'views/part/member/list.html',
+                controller: 'C_member_list'
             })
         $routeProvider.otherwise({      
             redirectTo: '/index'            
