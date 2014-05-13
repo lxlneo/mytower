@@ -33,12 +33,14 @@ angular.module('BHF')
                 if(/post|put/i.test(config.method)) key = 'data'
                 config[key] = data
 
-                $http(config).then(function (res) {
+                $http(config).success(function (res) {
+                    cb(res.data)
                     //交给回调处理
-                    if(options.onComplete) return options.onComplete(res)
-
-                    //以后再处理
-                    switch (res.status) {
+                    //if(options.onComplete) return options.onComplete(res)
+                }).error(function(data, status){
+//以后再处理
+                    console.log(data)
+                    switch (status) {
                         case 400:
                             alert('找不到文件啦')
                             break
@@ -46,18 +48,17 @@ angular.module('BHF')
                             alert('大事不好了，服务器发生错误啦')
                             break
                         case 406:
-                            alert('貌似你提交的数据有点不对' + JSON.stringify(res.data))
+                            alert('提示：' + data)
                             break
                         case 401:
                             alert('未经授权的访问')
                             break
                         default:
                             //以后再考虑不同的处理
-                            cb(res.data)
+                            alert('未知错误')
                             break
                     }
-                });
+                })
             }
-
         }
     })
