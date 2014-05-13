@@ -41,7 +41,7 @@ angular.module('BHF')
                             $scope.tosumbittext = "创建失败！";
                         }
                     });
-                }  　　
+                } 　　
             }
         }
     })

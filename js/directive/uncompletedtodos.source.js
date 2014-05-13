@@ -7,6 +7,7 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope, $element) {
+                $scope.showform = false;
                 var loadIssue = function(){
                     var url = 'project/' + $scope.router.id + '/issue'
                     var data = {
@@ -27,7 +28,11 @@ angular.module('BHF')
                 })
                 $scope.finishedIssue = function(e){
                 }
-                loadIssue()
+                loadIssue();
+
+                $scope.$on('issue:showedit',function(e,data){
+                    $scope.$broadcast('issue:filledit',data);
+                })
             }
         }
     })

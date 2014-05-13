@@ -1,8 +1,8 @@
 <div class="todo-actions actions">
     <div class="inr">
-        <a href="" class="run" title="标记成正在进行中" ng-click="clickAction('doing')">执行</a>
-        <a class="pause" ng-click="clickAction('pause')">暂停</a>
-        <a class="edit" title="编辑" ng-click="clickAction('edit')" href="">编辑</a>
-        <a title="删除" class="del" ng-click="clickAction('delete')" href="">删除</a>
+        <a class="run"  ng-show="showpause"  title="进行中" ng-click="clickAction('doing')">执行</a>
+        <a class="pause" ng-hide="showpause"  title="暂停" ng-click="clickAction('pause')">暂停</a>
+        <a class="edit"   title="编辑" ng-click="clickAction('edit')" >编辑</a>
+        <a class="del"   title="删除"  ng-click="clickAction('delete')">删除</a>
     </div>
 </div>
