@@ -7,7 +7,7 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope, $routeParams) {
-                var api = 'project/' + $scope.router.project_id + '/commit';
+                var api = 'project/' + ($scope.project_id || $scope.router.project_id) + '/commit';
                 var cond = {limit: 5}
                 if($scope.router.issue_id){
                     cond.limit = 9999
