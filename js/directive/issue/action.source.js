@@ -11,14 +11,15 @@ angular.module('BHF')
                 var issue = $scope.item;
                 var status = issue.status;
                 // 判断状态 doing 正在处理中
-                if (status == 'pause' || status == 'new') {
-                    $scope.showpause = false;
-                } else {
+                if (status == 'doing') {
                     $scope.showpause = true;
+                } else {
+                    $scope.showpause = false;
                 }
                 //更新状态
                 function _update_status(s) {
-                    API.doAction('issue/status/' + issue.id, {status: s}, "PUT", function (data) {
+                    console.log(s);
+                    API.doAction('project/'+issue.project_id+'/issue/'+issue.id+'/status', {status: s}, "PUT", function (data) {
                         $scope.$emit('issue:save');
                     });
                 }
