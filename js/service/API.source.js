@@ -8,8 +8,9 @@ angular.module('BHF')
 
         return {
             //执行ajax操作
-            doAction: function (api, data, method, cb) {
+            doAction: function (api, data, method, cb, options) {
                 var url = root + api
+                options = options || {}
 
                 //如果method不是string，则method为get
                 if (typeof method !== 'string') {
@@ -32,6 +33,9 @@ angular.module('BHF')
                 config[key] = data
 
                 $http(config).then(function (res) {
+                    //交给回调处理
+                    if(options.onComplete) return options.onComplete(res)
+
                     //以后再处理
                     switch (res.status) {
                         case 400:
