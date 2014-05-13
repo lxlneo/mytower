@@ -20,7 +20,7 @@ angular.module('BHF')
 
                 $scope.submit = function(){
                     //这种方式只是一个临时的解决方案，是不可行的
-                    var tag = $scope.item.tag;
+                    var tag = $el.parent().parent().parent().attr('data-tag');
                     if(!$scope.issue) return alert('亲，太没节操了，内容必需输入哇')
 
                     var api = 'project/' + $scope.router.id + '/issue'
