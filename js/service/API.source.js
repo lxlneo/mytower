@@ -29,7 +29,8 @@ angular.module('BHF')
                     method: method || 'GET'
                 }
 
-                var key = ['params', 'data'][~~(config.method === 'POST')]
+                var key = 'params'
+                if(/post|put/i.test(config.method)) key = 'data'
                 config[key] = data
 
                 $http(config).then(function (res) {
