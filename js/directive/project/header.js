@@ -3,7 +3,7 @@
 angular.module('BHF')
     .directive('proheader', function(API,$rootScope){
         return{
-            templateUrl: "views/part/proheader.html",
+            templateUrl: "views/part/project/header.html",
             restrict: "E",
             replace: true,
             link: function ($scope,$element) {
