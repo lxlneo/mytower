@@ -52,7 +52,7 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
                 controller: "C_report"
             })
             .when('/login', {
-                templateUrl: 'views/login.html',
+                templateUrl: 'views/part/member/login.html',
                 controller: 'C_login'
             })
         $routeProvider.otherwise({      
