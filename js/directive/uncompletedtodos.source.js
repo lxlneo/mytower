@@ -14,7 +14,7 @@ angular.module('BHF')
                         undone: true,
                         limit: 4,
                         offset: 0,
-                        tag: $element.parent().attr('data-tag')
+                        tag: $scope.tag
                     }
 
                     API.doAction(url, data, function(data){
@@ -26,7 +26,8 @@ angular.module('BHF')
                 $scope.$on('issue:save', function(){
                     loadIssue()
                 })
-                $scope.finishedIssue = function(e){
+                $scope.finishedIssue = function(){
+
                 }
                 loadIssue();
 
