@@ -4944,7 +4944,7 @@ transition-duration:.5s;
 	display:inline
 }
 .todolist .todo .todo-actions .pause {
-	display:none
+	display:inline
 }
 .todolist .todo .runner {
 	display:inline-block;

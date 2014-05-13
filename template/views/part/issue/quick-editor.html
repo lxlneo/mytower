@@ -1,22 +1,20 @@
 <ul class="todo-new-wrap">
-    <li class="todo-form">
+    <li class="todo-form" ng-show="newissue">
         <button type="button" class="btn btn-mini btn-new-todo" ng-click="showEditor()">添加新任务
         </button>
     </li>
     <li class="todo-form new" ng-show="showform">
         <div class="form-body">
             <input type="checkbox" disabled="">
-            <textarea class="todo-content" placeholder="新的任务" style="overflow: hidden; word-wrap: break-word; resize: none; height: 24px;" ng-model="issue"></textarea>
+            <textarea class="todo-content" placeholder="新的任务" style="overflow: hidden; word-wrap: break-word; resize: none; height: 24px;" ng-model="issue_textarea"></textarea>
             <a href="javascript:;" class="todo-label">
                 <span class="assignee">未指派</span> ·
                 <span class="due">没有截止时间</span>
             </a>
         </div>
         <div class="buttons create-buttons">
-            <button type="submit" class="btn btn-primary btn-create-todo" data-disable-with="正在保存..." ng-click="submit()">添加任务</button>
+            <button type="submit" class="btn btn-primary btn-create-todo" data-disable-with="正在保存..." ng-click="submit()">{{new_issue_btn}}</button>
             <a class="btn-cancel-todo" ng-click="showEditor(false)">取消</a>
         </div>
-        <input type="hidden" name="assignee_guid" class="hidden-assignee" value="-1">
-        <input type="hidden" name="due_at" class="hidden-due-date" value="">
     </li>
 </ul>
