@@ -19,6 +19,10 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
                 templateUrl: "views/dis_full_list.html",
                 controller: "C_dis_full_list"
             })
+            .when('/project/:id/issue', {
+                templateUrl: "views/dis_full_list.html",
+                controller: "C_dis_full_list"
+            })
             .when('/project/:project_id/issue/:issue_id', {
                 templateUrl: "views/dis_single_page.html",
                 controller: "C_dis_single_page"
@@ -46,6 +50,10 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
             .when('/report', {
                 templateUrl: "views/report.html",
                 controller: "C_report"
+            })
+            .when('/login', {
+                templateUrl: 'views/login.html',
+                controller: 'C_login'
             })
         $routeProvider.otherwise({      
             redirectTo: '/index'            

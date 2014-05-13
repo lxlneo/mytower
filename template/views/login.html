@@ -1,0 +1,27 @@
+<div class="page sheet sheet-active sheet-root" id="page-project">
+    <div class="page-inner">
+        <div style="margin: 0 auto; width:260px; margin-top: 160px;">
+            <form class="form" method="post" novalidate="">
+                <div class="form-item">
+                    <div class="form-field">
+                        <input type="text" tabindex="1" name="account" autofocus="" ng-model="account" placeholder="用户名或者邮箱">
+                    </div>
+                </div>
+                <div class="form-item">
+                    <div class="form-field">
+                        <input type="password" tabindex="2" name="password" placeholder="密码" ng-model="password">
+                    </div>
+                </div>
+                <div class="form-item sign-in-btn">
+                    <button type="submit" tabindex="3" ng-click="login($event)" class="btn btn-primary btn-submit">登录</button>
+                    <div class="desc" style="display: none">
+                        <label id="label-remember">
+                            <input type="checkbox" name="remember_me" id="cb-remember" tabindex="4" checked="1">
+                            下次自动登录</label>
+                        <span class="forgot-pw"><a href="/users/forgot_password" tabindex="5">忘记密码了？</a></span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
