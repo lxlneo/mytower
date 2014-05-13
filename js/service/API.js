@@ -31,7 +31,7 @@ angular.module('BHF')
 
                 var key = 'params'
                 if(/post|put/i.test(config.method)) key = 'data'
-                config[key] = data
+                config[key] = data || {}
 
                 $http(config).success(cb).error(function(data, status){
 //以后再处理
