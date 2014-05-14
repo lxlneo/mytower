@@ -8,23 +8,23 @@ angular.module('BHF')
             replace: true,
             link: function ($scope, $element) {
                 $scope.showform = false;
-                var loadIssue = function(){
+                var loadIssue = function(_data){
                     var url = 'project/' + $scope.router.project_id + '/issue'
                     var data = {
-                        undone: true,
+                        status: 'undone',
                         limit: 4,
                         offset: 0,
                         tag: $scope.tag
                     }
-
-                    API.doAction(url, data, function(data){
-                        $scope.data = data
+                    data = angular.extend(data,_data);
+                    API.doAction(url, data, function(result){
+                        $scope.data = result;
                     })
                 }
 
                 //当issue被保存
-                $scope.$on('issue:save', function(){
-                    loadIssue()
+                $scope.$on('issue:save', function(event,data){
+                    loadIssue(data);
                 })
 
                 loadIssue();

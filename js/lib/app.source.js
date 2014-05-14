@@ -31,24 +31,20 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
                 templateUrl: "views/project-sort.html",
                 controller: "C_project_sort"
             })
-            .when('/report', {
-                templateUrl: "views/report.html",
-                controller: "C_report"
-            })
             .when('/filelist/:project_id', {
                 templateUrl: "views/file_full_list.html",
                 controller: "C_file_full_list"
             })
-            .when('/doclist/:pid', {
+            .when('/doclist/:project_id', {
                 templateUrl: "views/doc_full_list.html",
                 controller: "C_doc_full_list"
             })
-            .when('/docsingle/:pid', {
+            .when('/docsingle/:project_id', {
                 templateUrl: "views/doc_singlel_page.html",
                 controller: "C_doc_single_page"
             })
-            .when('/report', {
-                templateUrl: "views/report.html",
+            .when('/report/weekly', {
+                templateUrl: "views/report/index.html",
                 controller: "C_report"
             })
             .when('/login', {
