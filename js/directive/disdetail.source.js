@@ -7,7 +7,7 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope, $element) {
-                $scope.project_id = $scope.router.id;
+                $scope.project_id = $scope.router.project_id;
                 $scope.isShowDisForm = false;
                 $scope.canceldisc = function () {
                     $scope.isShowDisForm = false;
@@ -23,6 +23,7 @@ angular.module('BHF')
                     data.title = $scope.title;
                     data.tag = 'project';
                     data.content = $scope.simditorvalue;
+                    data.status = data.id ? data.status : 'new';
                     if ("" == data.title || undefined == data.title) {
                         alert("标题必填哦~");
                         return;
@@ -35,9 +36,7 @@ angular.module('BHF')
                     API.doAction(url, data, "POST", function (data) {
                         if(data.id) {
                             $rootScope.$broadcast('discusslist:update');
-                            //清空simditor
-                            $scope.$broadcast('simditor:clean');
-                            $scope.title = "";
+                            $scope.canceldisc();
                         }
                     })
                 }

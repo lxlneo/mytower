@@ -7,17 +7,19 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope, $routeParams) {
-                var api = 'project/' + $rootScope.project_id + '/discussion';
+                $scope.project_id = $scope.router.project_id;
+                var api = 'project/' + $scope.project_id + '/discussion';
                 var data = {limit: 6}
-                function refresh(){
-                    API.doAction(api, data, function(data){
+                function refresh(_data){
+                    _data = angular.extend(data,_data);
+                    API.doAction(api, _data, function(data){
                         $scope.data = data;
                         $scope.show_dis_more = data.pagination.count > 0;
                     })
                 }
-                refresh();
-                $scope.$on("discusslist:update",function(){
-                    refresh();
+                refresh(data);
+                $scope.$on("discusslist:update",function(event,data){
+                    refresh(data);
                 });
             }
         }

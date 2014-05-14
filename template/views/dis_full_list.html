@@ -3,21 +3,7 @@
         <!--栏目标题-->
         <proheader></proheader>
         <div class="messages">
-            <div class="message" ng-repeat="item in data.items track by $index ">
-                <a href="" data-stack="" data-stack-root="">
-                    <img class="avatar" src="/images/path.jpg">
-                </a>
-                <div class="name">
-                    <a data-stack="" data-stack-root="" href="/#/member/{{item.creator}}">{{item.realname}}</a>
-                </div>
-                <a href="/#/issue/{{item.project_id}}/{{item.id}}" class="message-link">
-                    <span class="message-title">{{item.title}}</span>
-                    <span class="message-content">{{item.content}}</span>
-                </a>
-                <span class="time">{{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
-                <a data-stack="" href="" class="comments-count"> 1 </a>
-            </div>
-
+            <discussionlist></discussionlist>
         </div>
         <a href="javascript:;" id="btn-load-more" class="over">没有更多内容了</a>
     </div>

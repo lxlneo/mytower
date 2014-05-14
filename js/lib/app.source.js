@@ -15,7 +15,7 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
                 templateUrl: "views/project.html",
                 controller: "C_project"
             })
-            .when('/disfulllist/:id', {
+            .when('/disfulllist/:project_id', {
                 templateUrl: "views/dis_full_list.html",
                 controller: "C_dis_full_list"
             })
