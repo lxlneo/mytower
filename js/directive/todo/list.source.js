@@ -1,13 +1,13 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('todosbox', function(API){
+    .directive('todoslist', function(API){
         return{
-            templateUrl: "views/part/todos_box.html",
+            templateUrl: "views/part/todo/list.html",
             restrict: "E",
             replace: true,
             link: function ($scope) {
-                $scope.isShowTodolistForm = true;
+                $scope.tags = ['bug', '需求', '支持', '功能'];
             }
         }
     })

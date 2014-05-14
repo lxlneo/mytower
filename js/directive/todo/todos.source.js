@@ -1,9 +1,9 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('uncompletedtodos', function(API){
+    .directive('todos', function(API){
         return{
-            templateUrl: "views/part/uncompleted_todos.html",
+            templateUrl: "views/part/todo/todos.html",
             restrict: "E",
             replace: true,
             link: function ($scope, $element) {

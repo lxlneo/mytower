@@ -22,7 +22,7 @@ angular.module('BHF')
                     //这种方式只是一个临时的解决方案，是不可行的
                     //var tag = $el.parent().parent().parent().attr('data-tag');
                     if(!$scope.issue_textarea) return alert('亲，太没节操了，内容必需输入哇')
-                    var api = 'project/' + $scope.router.id + '/issue'
+                    var api = 'project/' + $scope.router.project_id + '/issue'
                     var data = {
                         status: 'new',
                         title: $scope.issue_textarea,
