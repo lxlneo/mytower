@@ -8,9 +8,10 @@ angular.module('BHF')
             replace: true,
             link: function ($scope, $routeParams) {
                 var project_id = $scope.router.project_id;
+                $scope.project_id = project_id;
                 var issue_id = $scope.router.issue_id;
-                var api = 'project/' + project_id + '/asset';
-                var data = {limit: 6}
+                var api = 'project/' + project_id + '/assets';
+                var data = {limit: 10}
                 //刷新列表
                 function refresh(_data) {
                     _data = angular.extend(data, _data);

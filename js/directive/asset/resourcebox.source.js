@@ -66,13 +66,15 @@ angular.module("BHF")
                 //创建文件上传对象
                 var uploader = $scope.uploader = $fileUploader.create({
                     scope: $scope,
-                    url: '/api/project/' + project_id + '/asset',
-                    alias: "asset"
+                    url: '/api/project/' + project_id + '/assets',
+                    alias: "assets"
                 });
 
                 uploader.bind('complete', function( event, item, progress ) {
-                    uploader.clearQueue();
-                    getAsses();
+                    //uploader.clearQueue();
+                    //$scope.updatePanelShow = false;
+                    //getAsses();
+                    console.log(event,item,progress);
                 });
 
                 uploader.bind('error', function( event, item, progress ) {
@@ -126,7 +128,6 @@ angular.module("BHF")
                 }
 
                 function getAsses() {
-                  // $scope.$emit('asset:torefresh');
                     $scope.$broadcast('asset:bhfupdate')
                 }
                 getAsses();

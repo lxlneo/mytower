@@ -13,7 +13,7 @@
                         </span>
                     <span class="size">{{file.file_size | formartFilesize |number :2}}MB</span>
                     <div class="links">
-                        <a href="{{file.url}}" class="link-download">下载</a>
+                        <a target="_blank" href="/api{{file.url}}" class="link-download">下载</a>
                         <!--<span>或</span>
                         <a href="" data-fileid="{{file.id}}" ng-click="delfile(event)" class="link-delete">删除</a>-->
                     </div>
@@ -22,7 +22,7 @@
         </div>
     </div>
     <div class="file-links folders" ng-show="filelist.pagination.count > 0">
-        <a href="#/fileall/{{project_id}}" class="link-more-files" data-stack="">全部{{filelist.pagination.count}}个文件</a>
+        <a href="#/filelist/{{project_id}}" class="link-more-files" data-stack="">全部{{filelist.pagination.count}}个文件</a>
     </div>
     <div class="file-links folders" ng-show="filelist.pagination.count == 0">
         <a href="" class="link-more-files" data-stack="">还米有人上传文件</a>

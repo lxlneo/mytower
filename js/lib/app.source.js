@@ -35,7 +35,7 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
                 templateUrl: "views/report.html",
                 controller: "C_report"
             })
-            .when('/filelist/:pid', {
+            .when('/filelist/:project_id', {
                 templateUrl: "views/file_full_list.html",
                 controller: "C_file_full_list"
             })
