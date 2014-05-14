@@ -71,6 +71,7 @@ angular.module("BHF")
                 });
 
                 uploader.bind('complete', function( event, item, progress ) {
+                    uploader.clearQueue();
                     getAsses();
                 });
 
@@ -125,7 +126,8 @@ angular.module("BHF")
                 }
 
                 function getAsses() {
-                   $scope.$emit('asset:torefresh');
+                  // $scope.$emit('asset:torefresh');
+                    $scope.$broadcast('asset:bhfupdate')
                 }
                 getAsses();
             }
