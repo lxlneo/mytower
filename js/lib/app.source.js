@@ -11,7 +11,7 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
                 templateUrl: "views/addpro.html",
                 controller: "C_addpro"
             })
-            .when('/project/:id', {
+            .when('/project/:project_id', {
                 templateUrl: "views/project.html",
                 controller: "C_project"
             })

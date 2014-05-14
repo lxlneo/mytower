@@ -1,0 +1,30 @@
+<div>
+    <div class="file-list">
+        <div class="file" ng-repeat="file in filelist.items">
+            <div class="file-thumb">
+                <a href="" target="_blank" data-origin-size="64,88"> <img alt="" src="/images/file_extension/file_extension_{{file.file_name | findFileType }}.png" title="">
+                </a>
+            </div>
+            <div class="file-info">
+                <div class="title">
+                    <a class="name" href="" data-stack="" title="">{{file.original_name}}</a>
+                        <span class="name">
+                            <a href="" title="" class="link-download">{{file.original_name}}</a>
+                        </span>
+                    <span class="size">{{file.file_size | formartFilesize |number :2}}MB</span>
+                    <div class="links">
+                        <a href="{{file.url}}" class="link-download">下载</a>
+                        <!--<span>或</span>
+                        <a href="" data-fileid="{{file.id}}" ng-click="delfile(event)" class="link-delete">删除</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="file-links folders" ng-show="filelist.pagination.count > 0">
+        <a href="#/fileall/{{project_id}}" class="link-more-files" data-stack="">全部{{filelist.pagination.count}}个文件</a>
+    </div>
+    <div class="file-links folders" ng-show="filelist.pagination.count == 0">
+        <a href="" class="link-more-files" data-stack="">还米有人上传文件</a>
+    </div>
+</div>

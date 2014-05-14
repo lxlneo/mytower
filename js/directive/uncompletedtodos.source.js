@@ -9,7 +9,7 @@ angular.module('BHF')
             link: function ($scope, $element) {
                 $scope.showform = false;
                 var loadIssue = function(){
-                    var url = 'project/' + $scope.router.id + '/issue'
+                    var url = 'project/' + $scope.router.project_id + '/issue'
                     var data = {
                         undone: true,
                         limit: 4,
