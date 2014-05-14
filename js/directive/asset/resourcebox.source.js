@@ -71,10 +71,9 @@ angular.module("BHF")
                 });
 
                 uploader.bind('complete', function( event, item, progress ) {
-                    //uploader.clearQueue();
-                    //$scope.updatePanelShow = false;
-                    //getAsses();
-                    console.log(event,item,progress);
+                    uploader.clearQueue();
+                    $scope.updatePanelShow = false;
+                    getAsses();
                 });
 
                 uploader.bind('error', function( event, item, progress ) {
