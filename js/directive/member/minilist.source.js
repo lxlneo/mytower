@@ -2,14 +2,15 @@
 
 angular.module('BHF')
     .directive('memberlist', function(API){
-        var memberList;
 
         return{
-            templateUrl: "views/part/memberlist.html",
+            templateUrl: "views/part/member/minilist.html",
             restrict: "E",
             replace: true,
             link: function ($scope,$element) {
-                           $scope.members = memberList;
+                API.doAction('member', {}, function(data){
+                    $scope.memberList = data
+                });
             }
         }
     })
