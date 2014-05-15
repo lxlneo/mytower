@@ -3,7 +3,7 @@
         <div class="todo-wrap">
             <span class="todo-content">
                 <span class="raw"></span>
-                <a href="#">{{item.message | limitTo : 30}}</a>
+                <a href="{{item.url}}" target="_blank">{{item.message | limitTo : 60}}</a>
              </span>
             <a class="label">{{item.sha | limitTo : 10}}</a>
             <a class="label todo-assign-due">
