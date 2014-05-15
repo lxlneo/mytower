@@ -9,6 +9,12 @@ angular.module('BHF')
         }
         getprolist();
 
+        function getuserInfo(){
+            API.doAction("mine", {}, function (data) {
+                $scope.user = data;
+            });
+        }
+
         $scope.delproject = function($event){
             $event.preventDefault();
             var project_id = $($event.target).data('pid');
