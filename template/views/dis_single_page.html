@@ -5,11 +5,11 @@
         <div class="topic" style="border-bottom: 1px solid #ddd;padding: 0 0 30px 0;margin: 20px 0 30px;width: 700px;">
         <div class="project-info" style="font-size: 12px;color: #aaa;margin: 0 0 20px 0;">
             <div class="info" style="float: right;">
-                <a class="author" href="#">{{issue.realname}}</a>
-                <a class="create-time">{{issue.timestamp |date: 'yyyy-MM-dd hh:mm'}}</a>
+                <a class="author" href="#">{{single_issue.realname}}</a>
+                <a class="create-time">{{single_issue.timestamp |date: 'yyyy-MM-dd hh:mm'}}</a>
             </div>
-            <h3 title="{{issue.title}}">{{issue.title}}</h3>
-            <p>{{issue.content}}</p>
+            <h3 title="{{single_issue.title}}">{{single_issue.title}}</h3>
+            <p>{{single_issue.content}}</p>
         </div>
         </div>
         <div class="comments streams">
@@ -18,9 +18,9 @@
                     <img class="avatar" src="/images/path.jpg" width="50" height="50">
                 </a>
                 <div class="comment-actions actions">
-                    <a href="/comments/901063c946e84c51913ec2dd39caadfd/edit" class="edit" data-remote="true"
+                    <a href="" class="edit" data-remote="true"
                        data-loading="true" data-method="get"   style="display:inline;">编辑</a>
-                    <a href="/comments/901063c946e84c51913ec2dd39caadfd/destroy" class="del"style="display: inline;">删除</a>
+                    <a href="" class="del"style="display: inline;">删除</a>
                 </div>
                 <div class="comment-main">
                     <div class="info">

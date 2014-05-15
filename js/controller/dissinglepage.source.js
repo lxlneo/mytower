@@ -8,7 +8,7 @@ angular.module('BHF')
         var data = {"limit": 20};
         var url = "project/" + params.project_id + "/issue/" + params.issue_id;
         API.doAction(url, {}, "GET", function (_data) {
-            $scope.issue = _data;
+            $scope.single_issue = _data;
             refresh(data);
         })
         //刷新评论列表
