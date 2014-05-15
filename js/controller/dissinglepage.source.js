@@ -19,12 +19,16 @@ angular.module('BHF')
         }
 
         //提交评论
-        $scope.submitcommit=function(){
+        $scope.submitcomment=function(){
             $scope.simditorvalue = "";
             //获得值
             $scope.$broadcast('simditor:getvalue');
             var _data = {};
             _data.content = $scope.simditorvalue;
+            if(_data.content == ""){
+                alert('必须输入内容的~');
+                return;
+            }
             API.doAction(url+"/comment",_data,"POST",function(_data){
                 if(_data.id){
                     $scope.$broadcast('simditor:clean');

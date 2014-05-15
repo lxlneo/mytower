@@ -4,6 +4,10 @@
         <proheader></proheader>
         <div class="topic" style="border-bottom: 1px solid #ddd;padding: 0 0 30px 0;margin: 20px 0 30px;width: 700px;">
         <div class="project-info" style="font-size: 12px;color: #aaa;margin: 0 0 20px 0;">
+            <div class="info" style="float: right;">
+                <a class="author" href="#">{{issue.realname}}</a>
+                <a class="create-time">{{issue.timestamp |date: 'yyyy-MM-dd hh:mm'}}</a>
+            </div>
             <h3 title="{{issue.title}}">{{issue.title}}</h3>
             <p>{{issue.content}}</p>
         </div>
@@ -20,7 +24,7 @@
                 </div>
                 <div class="comment-main">
                     <div class="info">
-                        <a class="author" href="#">创建人</a>
+                        <a class="author" href="#">{{item.realname}}</a>
                         <a class="create-time">{{item.timestamp |date: 'yyyy-MM-dd hh:mm'}}</a>
                     </div>
                     <div class="comment-content editor-style">
@@ -31,7 +35,7 @@
         </div>
         <div class="comment comment-form new">
             <form class="form form-editor form-new-comment" method="post"action="">
-                <a class="avatar-wrap" href="/members/64f02623b0d44c789294cee0f0cbdb8d">
+                <a class="avatar-wrap" href="">
                     <img class="avatar" width="50" height="50"src="https://avatar.tower.im/123fc3f828944a8a9a32fcc055c536fe">
                 </a>
                 <div class="comment-main">
