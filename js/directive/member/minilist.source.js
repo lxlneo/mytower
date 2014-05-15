@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('memberlist', function(API){
+    .directive('minimember', function(API){
 
         return{
             templateUrl: "views/part/member/minilist.html",
