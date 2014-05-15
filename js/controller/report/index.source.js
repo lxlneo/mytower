@@ -44,10 +44,11 @@ angular.module('BHF')
                     }
                 }
                items[i].uncompleted = uncompleted;
-                items[i].completed = completed;
-                delete  items[i].issue;
+               items[i].completed = completed;
+               delete  items[i].issue;
             }
             $scope.items = items;
+            $scope.empty =empty;
         }
     })
 

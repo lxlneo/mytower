@@ -129,9 +129,12 @@
                 <div class="member-empty">
                     <h5 class="title">他们本周无任务和周报记录</h5>
                     <ul class="members">
-                        <li class="member"> <a href="" data-stack-root="true" data-stack="true" title="ImDong"><img alt="ImDong" class="avatar" src="" title="ImDong"></a> <a href="" class="nickname" data-stack-root="true" data-stack="true" title="ImDong">ImDong</a> </li>
-                        <li class="member"> <a href="" data-stack-root="true" data-stack="true" title="李雪龙"><img alt="李雪龙" class="avatar" src="" title="李雪龙"></a> <a href="" class="nickname" data-stack-root="true" data-stack="true" title="李雪龙">李雪龙</a> </li>
-                        <li class="member"> <a href="" data-stack-root="true" data-stack="true" title="易晓峰"><img alt="易晓峰" class="avatar" src="" title="易晓峰"></a> <a href="" class="nickname" data-stack-root="true" data-stack="true" title="易晓峰">易晓峰</a> </li>
+                        <li class="member" ng-repeat="member in members">
+                            <a href="" data-stack-root="true" data-stack="true" title="{{member.realname}}">
+                                <img alt="{{member.realname}}" class="avatar" src="" title="{{member.realname}}">
+                            </a>
+                            <a href="" class="nickname" data-stack-root="true" data-stack="true" title="{{member.realname}}">{{member.realname}}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
