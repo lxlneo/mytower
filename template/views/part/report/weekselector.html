@@ -1,0 +1,8 @@
+<div class="week-selector">
+    <a href="javascript:;" class="left" ng-click="changeweek(-1)"> <i class="fa fa-chevron-left"></i> </a>
+    <a href="javascript:;" class="right" ng-click="changeweek(1)"  ng-show="weekday.right" > <i class="fa fa-chevron-right"></i> </a>
+    <div class="week" data-week-start="2014-04-28 00:00:00 +0800" title="点击通过日历快速选周">
+        <p class="date">{{weekday.week}}</p>
+        <p class="range">{{weekday.day}}</p>
+    </div>
+</div>

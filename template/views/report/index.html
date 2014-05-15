@@ -2,41 +2,40 @@
     <div class="page sheet sheet-active sheet-root" id="page-team-week" data-page-name="周报总览">
         <div class="page-inner">
             <h3 class="page-title">周报总览</h3>
-            <div class="week-selector">
-                <a href="javascript:;" class="left"> <i class="fa fa-chevron-left"></i> </a>
-                <a href="javascript:;" class="right"> <i class="fa fa-chevron-right"></i> </a>
-                <div class="week" data-week-start="2014-04-28 00:00:00 +0800" title="点击通过日历快速选周">
-                    <p class="date">2014年第17周</p>
-                    <p class="range">4月28日 ~ 5月4日</p>
-                </div>
-            </div>
+            <weekselector></weekselector>
             <!--周报列表-->
             <div class="member-weeks">
-                <div class="member-week">
+                <div class="member-week" ng-repeat="item in items">
                     <div class="member-week-member">
-                        <a href="" data-stack-root="true" data-stack="true" title="易晓峰">
-                            <img alt="易晓峰" class="avatar" src="images/path.jpg" title="易晓峰">
+                        <a href="" data-stack-root="true" data-stack="true" title="{{item.member.realname}}">
+                            <img alt="{{item.member.realname}}" class="avatar" src="images/path.jpg" title="{{item.member.realname}}">
                         </a>
-                        <a href="" class="nickname" data-stack-root="true" data-stack="true" title="易晓峰">易晓峰</a>
+                        <a href="" class="nickname" data-stack-root="true" data-stack="true" title="{{item.member.realname}}">{{item.member.realname}}</a>
                     </div>
                     <div class="member-week-content">
                         <div class="section section-todos">
                             <h4 class="title">本周完成任务</h4>
                             <div class="todolist">
                                 <ul class="todos todos-completed">
-                                    <li class="todo completed">
+                                    <li class="todo completed" ng-repeat="issue in item.completed">
                                         <!--<div class="todo-actions actions">
                                             <div class="inr">
                                                 <a href="/projects/02efed7428204733b4cef508f6220b6b/todos/1915f904744d4d57b183d9da680d47e8/destroy" class="del" data-remote="true" data-method="post" data-confirm="确定要删除这条任务吗？" title="删除">删除</a>
                                             </div>
                                         </div>-->
                                         <div class="todo-wrap">
-                                            <input type="checkbox" name="todo-done" checked="">
+                                            <input type="checkbox">
+                                            <span class="label">
+                                                 <span>{{issue.status}}</span>
+                                             </span>
                                             <span class="todo-content">
-                                                <a href="/projects/02efed7428204733b4cef508f6220b6b/todos/1915f904744d4d57b183d9da680d47e8" data-stack="">issue的测试用例</a>
+                                                <a href="#/project/{{issue.project_id}}/issue/{{issue.id}}">{{issue.title}}</a>
                                             </span>
-                                            <span class="label completed-member">( 易晓峰 <span class="completed-time" data-abstime="2014-05-09 09:26:52 +0800">5月9日</span> )</span>
-                                            <a href="/projects/02efed7428204733b4cef508f6220b6b" class="label todo-proj" data-stack-root="true" data-stack="true" title="BHF - BHF-API测试用例">BHF - BHF-API...</a>
+                                            <span class="label completed-member">( {{item.member.realname}} <span class="completed-time" data-abstime="2014-05-09 09:26:52 +0800">{{issue.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span> )</span>
+                                            <a href="#/project/{{issue.project_id}}" class="label todo-proj" data-stack-root="true" data-stack="true" title="{{issue.project_name}}">{{issue.project_name}}</a>
+                                            <span class="label">
+                                                    <span>{{issue.tag}}</span>
+                                           </span>
                                         </div>
                                     </li>
                                 </ul>
@@ -44,34 +43,34 @@
                          </div>
 
                         <div class="section section-todos">
-                            <h4 class="title">本周新增任务</h4>
+                            <h4 class="title">本周未完成任务</h4>
                             <div class="todolist">
                                 <ul class="todos todos-uncompleted">
-                                    <li class="todo" data-guid="04dd5495787d4ce596b0ee1e0671829b" data-sort="17408.0" data-sequence-mine="2048.0" data-sort-url="/projects/02efed7428204733b4cef508f6220b6b/todos/04dd5495787d4ce596b0ee1e0671829b/reorder" data-project-guid="02efed7428204733b4cef508f6220b6b" data-project-name="BHF" data-updated-at="1399966612">
-                                        <div class="todo-actions actions">
+                                    <li class="todo uncompleted" ng-repeat="issue in item.uncompleted">
+                                        <!--<div class="todo-actions actions">
                                             <div class="inr">
-                                                <a href="/projects/02efed7428204733b4cef508f6220b6b/todos/04dd5495787d4ce596b0ee1e0671829b/running" class="run" data-loading="true" data-method="post" data-remote="true" title="标记成正在进行中">执行</a>
-                                                <a href="/projects/02efed7428204733b4cef508f6220b6b/todos/04dd5495787d4ce596b0ee1e0671829b/pause" class="pause" data-loading="true" data-method="post" data-remote="true" title="暂停">暂停</a>
-                                                <a href="/projects/02efed7428204733b4cef508f6220b6b/todos/04dd5495787d4ce596b0ee1e0671829b/edit" class="edit" data-request-members="02efed7428204733b4cef508f6220b6b" title="编辑">编辑</a>
-                                                <a href="/projects/02efed7428204733b4cef508f6220b6b/todos/04dd5495787d4ce596b0ee1e0671829b/destroy" class="del" data-remote="true" data-method="post" data-confirm="确定要删除这条任务吗？" title="删除">删除</a>
+                                                <a href="/projects/02efed7428204733b4cef508f6220b6b/todos/1915f904744d4d57b183d9da680d47e8/destroy" class="del" data-remote="true" data-method="post" data-confirm="确定要删除这条任务吗？" title="删除">删除</a>
                                             </div>
-                                        </div>
+                                        </div>-->
                                         <div class="todo-wrap">
-                                            <input type="checkbox" name="todo-done">
-                            <span class="todo-content">
-                                <span class="raw">加入获取用户列表的API</span>
-                                <span>加入获取用户列表的API</span>
-                                <a href="/projects/02efed7428204733b4cef508f6220b6b/todos/04dd5495787d4ce596b0ee1e0671829b" data-stack="">加入获取用户列表的API</a>
-                            </span>
-                                            <a class="label todo-assign-due" href="javascript:;" data-request-members="02efed7428204733b4cef508f6220b6b">
-                                                <span class="assignee" data-guid="d2a7ff82d9f54eb696b6ad2a01402be5">易晓峰</span>
-                                            </a>
-                                            <a href="/projects/02efed7428204733b4cef508f6220b6b" class="label todo-proj" data-stack-root="true" data-stack="true" title="BHF - BHF-API">BHF - BHF-API</a>
+                                            <input type="checkbox">
+                                             <span class="label">
+                                                    <span>{{issue.status}}</span>
+                                             </span>
+                                            <span class="todo-content">
+                                                <a href="#/project/{{issue.project_id}}/issue/{{issue.id}}">{{issue.title}}</a>
+                                            </span>
+                                            <span class="label completed-member">( {{item.member.realname}} <span class="completed-time" data-abstime="2014-05-09 09:26:52 +0800">{{issue.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span> )</span>
+                                            <a href="#/project/{{issue.project_id}}" class="label todo-proj" data-stack-root="true" data-stack="true" title="{{issue.project_name}}">{{issue.project_name}}</a>
+                                            <span class="label">
+                                                    <span>{{issue.tag}}</span>
+                                           </span>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                         </div>
+
                         <!--<div class="section section-report">
                             <h4 class="title">本周周报</h4>
 
@@ -84,6 +83,48 @@
                         </div>-->
                     </div>
                 </div>
+                <!--未分配任务-->
+                <div class="member-weeks">
+                    <div class="member-week">
+                        <div class="member-week-member">
+                            <a href="" data-stack-root="true" data-stack="true" title="honey-lab">
+                                <img alt="honey-lab" class="avatar" src="images/path.jpg" title="honey-lab">
+                            </a>
+                            <a href="" class="nickname" data-stack-root="true" data-stack="true" title="honey-lab">honey-lab</a>
+                        </div>
+                        <div class="member-week-content">
+                            <div class="section section-todos">
+                                <h4 class="title">未分配任务</h4>
+                                <div class="todolist">
+                                    <ul class="todos todos-uncompleted">
+                                        <li class="todo"ng-repeat="item in unassigned">
+                                            <!--<div class="todo-actions actions">
+                                                <div class="inr">
+                                                    <a href="/projects/02efed7428204733b4cef508f6220b6b/todos/1915f904744d4d57b183d9da680d47e8/destroy" class="del" data-remote="true" data-method="post" data-confirm="确定要删除这条任务吗？" title="删除">删除</a>
+                                                </div>
+                                            </div>-->
+                                            <div class="todo-wrap">
+                                                 <span class="label">
+                                                    <span>{{item.status}}</span>
+                                                </span>
+                                            <span class="todo-content">
+                                                <a href="" data-stack="">{{item.title}}</a>
+                                            </span>
+                                                <span class="label completed-member">
+                                                    (<span class="completed-time">{{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span> )
+                                                </span>
+                                                <a href="#/project/{{item.project_id}}" class="label todo-proj" data-stack-root="true" data-stack="true" title="{{item.project_name}}">{{item.project_name}}</a>
+                                                 <span class="label">
+                                                    <span>{{item.tag}}</span>
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                </div>
                 <!--本周没有周报的人-->
                 <div class="member-empty">
                     <h5 class="title">他们本周无任务和周报记录</h5>
@@ -94,8 +135,6 @@
                     </ul>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
