@@ -15,13 +15,13 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
                 templateUrl: "views/project.html",
                 controller: "C_project"
             })
-            .when('/disfulllist/:project_id', {
+            .when('project/:project_id/disfulllist', {
                 templateUrl: "views/dis_full_list.html",
                 controller: "C_dis_full_list"
             })
-            .when('/project/:id/issue', {
-                templateUrl: "views/dis_full_list.html",
-                controller: "C_dis_full_list"
+            .when('/project/:project_id/issue', {
+                templateUrl: "views/issue_full_list.html",
+                controller: "C_issue_full_list"
             })
             .when('/project/:project_id/issue/:issue_id', {
                 templateUrl: "views/dis_single_page.html",
