@@ -8,7 +8,7 @@
                     <span class="link-expand" title="显示所有成员">
                         <i class="fa fa-caret-down"></i>
                     </span>
-                    <span class="link-clear" title="移除任务负责人">
+                    <span class="link-clear" ng-click="clean_assginee('owen')" title="移除任务负责人">
                         <i class="fa fa-times"></i>
                     </span>
                     <div class="item-list" ng-show="isshowmember">
@@ -22,7 +22,7 @@
             <h3>任务截止时间</h3>
             <div class="due-date-wrapper selected">
                 <input type="text" class="txt-due-date" placeholder="选择截止时间">
-                <a href="javascript:;" class="link-remove-due-date" title="取消截止时间">
+                <a href="javascript:;" ng-click="clean_assginee('due')" class="link-remove-due-date" title="取消截止时间">
                     <span class="fa fa-times"></span>
                 </a>
                 <div class="due-date-picker">
