@@ -8,7 +8,7 @@ module.exports = {
     proxy: {
         forward: {
             //定义代理转发
-            "/api": "http://172.31.11.59:8000/"
+            "/api": "http://172.31.11.59:4000/"
         }
     },
     //替换掉文件名中的source
