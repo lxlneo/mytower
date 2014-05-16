@@ -8,5 +8,6 @@ angular.module('BHF')
         var api = 'project/' +  $scope.project_id + '/stat'
         API.doAction(api, {}, function(data){
             $scope.stat = data
+            $scope.today = moment().format('YYYY-MM-DD')
         })
     })
