@@ -1,0 +1,47 @@
+<div class="simple-popover direction-right-bottom"   ng-show="show_assigneebox" style="top: {{top}}px; left: {{left}}px;">
+    <div class="simple-popover-content"><div class="todo-popover">
+        <div class="select-assignee">
+            <h3>将任务指派给</h3>
+            <div class="assignee-wrapper">
+                <div class="mcw-smart-select member-select selected">
+                    <input type="text" class="txt-assignee select-result" placeholder="输入成员姓名（缩写）">
+                    <span class="link-expand" title="显示所有成员">
+                        <i class="fa fa-caret-down"></i>
+                    </span>
+                    <span class="link-clear" title="移除任务负责人">
+                        <i class="fa fa-times"></i>
+                    </span>
+                    <div class="item-list" ng-show="isshowmember">
+                        <div class="link-item"ng-repeat="member in members" data-id="{{member.id}}"><span>{{member.realname}}</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="select-due-date">
+            <h3>任务截止时间</h3>
+            <div class="due-date-wrapper selected">
+                <input type="text" class="txt-due-date" placeholder="选择截止时间">
+                <a href="javascript:;" class="link-remove-due-date" title="取消截止时间">
+                    <span class="fa fa-times"></span>
+                </a>
+                <div class="due-date-picker">
+                    <div class="cal-wrapper">
+                        <input type="hidden" class="hidden-due-date" value="">
+                    </div>
+                </div>
+            </div>
+            <div class="popover-buttons">
+                <button type="button" ng-click="set_owner_due()" class='btn  btn-submit-popover' style="position: relative;top: 5px;left: 108px;padding:3px 10px;" >确&nbsp;&nbsp;定</button>
+                <button type="button" ng-click="hideassigneebox()" class='btn btn-mini' style="position: relative;top: 5px;left: -48px;padding:3px 10px;" >取&nbsp;&nbsp;消</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="simple-popover-arrow">
+        <i class="arrow arrow-shadow-1"></i>
+        <i class="arrow arrow-shadow-0"></i>
+        <i class="arrow arrow-border"></i>
+        <i class="arrow arrow-basic"></i>
+    </div>
+</div>
