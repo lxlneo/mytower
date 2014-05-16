@@ -56,6 +56,9 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
             }).when('/project/:project_id/commit', {
                 templateUrl: 'views/commit.html',
                 controller: 'C_commit'
+            }).when('/project/:project_id/stat', {
+                templateUrl: 'views/stat.html',
+                controller: 'C_stat'
             })
         $routeProvider.otherwise({      
             redirectTo: '/index'            
