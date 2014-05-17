@@ -21,12 +21,12 @@
         <div class="select-due-date">
             <h3>任务截止时间</h3>
             <div class="due-date-wrapper selected">
-                <input type="text" class="txt-due-date" ng-model="due_date" ng-click="show_due_date()" placeholder="选择截止时间">
+                <input type="text" class="txt-due-date" id="duedate" ng-model="due_date"  placeholder="选择截止时间">
                 <a href="javascript:;" ng-click="clean_assginee('due')" class="link-remove-due-date" title="取消截止时间">
                     <span class="fa fa-times"></span>
                 </a>
                 <div class="due-date-picker" ng-show="is_show_due_date">
-                    <div class="cal-wrapper"id="duedate">
+                    <div class="cal-wrapper">
                     </div>
                 </div>
             </div>
