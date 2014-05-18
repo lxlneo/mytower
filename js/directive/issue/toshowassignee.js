@@ -7,7 +7,9 @@ angular.module('BHF')
             restrict: "E",
             replace: true,
             link: function ($scope, $element) {
-                var issue_id = $scope.item.id;
+                var issue = $scope.item;
+                var broadcast_data = {};
+                broadcast_data.issue = {id:issue.id,owner_id:issue.owner,owner_name:issue.owner_name,due:issue.plan_finish_time};
 
                 $scope.setowner_and_due = function ($event) {
                     var target = $($event.target);
@@ -17,13 +19,16 @@ angular.module('BHF')
                     var pagey = target.offset().top;
                     var position = {left: width + pagex + 21, top: heigth + pagey - 122};
                     //console.log(position, $event, target.offset());
-                    show(position);
+                    broadcast_data.position = position;
+                    show(broadcast_data);
 
                 }
-                function show(position) {
+
+                function show(_data) {
                     $rootScope.show_assigneebox = false;
-                    $rootScope.$broadcast('assigneebox:show', position);
+                    $rootScope.$broadcast('assigneebox:show', _data);
                 }
+
             }
         }
     })
