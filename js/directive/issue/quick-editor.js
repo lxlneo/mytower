@@ -26,7 +26,7 @@ angular.module('BHF')
                     var data = {
                         status: 'new',
                         title: $scope.issue_textarea,
-                        tag: $scope.tag
+                        tag: $scope.tag||$scope.router.tag
                     }
                     data = angular.extend(issue_obj,data);
                     var method = data.id ? 'PUT' :'POST'

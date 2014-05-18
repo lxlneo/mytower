@@ -18,15 +18,9 @@
             <option value="done">done</option>
         </select>
         <br>
-        <select ng-model="filter_owner">
-            <option value="">ALL</option>
-            <option value="0">今天</option>
-            <option value="1">明天</option>
-            <option value="2">本周</option>
-            <option value="3">下周</option>
-            <option value="5">以后</option>
-            <option value="4">已延误</option>
-            <option value="6">没有截止时间</option>
-        </select>
+        <!--<select ng-model="filter_owner">
+            <option value="">所有人</option>
+            <option ng-repeat="member in memberList" value="{{member.id}}">{{member.realname}}</option>
+        </select>-->
     </div>
 </div>

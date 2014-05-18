@@ -14,7 +14,7 @@ angular.module('BHF')
                         status: 'undone',
                         limit: 4,
                         offset: 0,
-                        tag: $scope.tag
+                        tag: $scope.tag||$scope.router.tag
                     }
                     data = angular.extend(data,_data);
                     API.doAction(url, data, function(result){
