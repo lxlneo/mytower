@@ -5,60 +5,58 @@
 
     </div>
     <div id="page-project-stat" data-page-name="数据统计" class="page sheet sheet-active sheet-1" data-url="/projects/02efed7428204733b4cef508f6220b6b/stat/" data-since="2014-05-16 17:49:42 +0800">
-    <div class="page-inner">
-        <div class="title">
-            <h3>项目统计</h3>
-            <p class="date">截止 {{today}}</p>
-        </div>
+        <div class="page-inner">
+            <div class="title">
+                <h3>项目统计</h3>
+                <p class="date">截止 {{today}}</p>
+            </div>
 
-        <div class="todo-stats">
-            <ul class="summary">
-                <li class="total">
-                    <span class="name">总任务数</span>
-                    <span class="count">{{stat.overview.total}}</span>
-                </li>
-                <li class="delay">
-                    <span class="name">延误任务</span>
-                    <span class="count">{{stat.overview.delay}}</span>
-                </li>
-                <li class="ratio last">
-                    <span class="name">延误率%</span>
-                    <span class="count">{{stat.overview.delay / stat.overview.total}}</span>
-                </li>
-            </ul>
+            <div class="todo-stats">
+                <ul class="summary">
+                    <li class="total">
+                        <span class="name">总任务数</span>
+                        <span class="count">{{stat.overview.total}}</span>
+                    </li>
+                    <li class="delay">
+                        <span class="name">延误任务</span>
+                        <span class="count">{{stat.overview.delay}}</span>
+                    </li>
+                    <li class="ratio last">
+                        <span class="name">延误率%</span>
+                        <span class="count">{{stat.overview.delay / stat.overview.total}}</span>
+                    </li>
+                </ul>
 
-            <div class="member-stats">
-                <table class="stats-table">
-                    <thead>
-                    <tr>
-                        <th class="member">成员</th>
-                        <th class="todo desc">任务数</th>
-                        <th class="ratio">延误率%</th>
-                    </tr>
-                    </thead>
-                    <tbody>
+                <div class="member-stats">
+                    <table class="stats-table">
+                        <thead>
+                        <tr>
+                            <th class="member">成员</th>
+                            <th>任务数</th>
+                            <th>已完成</th>
+                            <th style="color: red;">延误</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         <tr ng-repeat="item in stat.members">
                             <td class="member">
                                 <img class="avatar" alt="{{item.profile.realname}}" src="https://avatar.tower.im/123fc3f828944a8a9a32fcc055c536fe">
                                 <span class="name">{{item.profile.realname}}</span>
                             </td>
-                            <td class="todo">
-                                <div class="stat">
-                                    <span class="count">{{item.stat.total}}</span>
-                                    <div style="width: 100%" class="bar">
-                                        <div style="width: 15.384615384615385%" class="inner-bar">
-                                        </div>
-                                    </div>
-                                </div>
+                            <td>
+                                {{item.stat.total}}
                             </td>
-                            <td class="ratio">
-                                <span>15.4</span>
+                            <td>
+                                {{item.stat.done}}
+                            </td>
+                            <td style="color: red;">
+                                {{item.stat.delay}}
                             </td>
                         </tr>
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </div>
