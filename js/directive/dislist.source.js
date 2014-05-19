@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('discussionlist', function(API,$rootScope){
+    .directive('discussionlist', function(API,$rootScope,$sce){
         return{
             templateUrl: "views/part/dislist.html",
             restrict: "E",
@@ -21,6 +21,10 @@ angular.module('BHF')
                 $scope.$on("discusslist:update",function(event,data){
                     refresh(data);
                 });
+
+                $scope.tohtml = function(str){
+                   return $sce.trustAsHtml(str);
+                }
             }
         }
     })

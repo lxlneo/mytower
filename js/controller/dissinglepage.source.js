@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .controller('C_dis_single_page', function ($scope, $routeParams, $rootScope, API) {
+    .controller('C_dis_single_page', function ($scope, $routeParams, $rootScope, API,$sce) {
         var params = $routeParams;
         $rootScope.project_id = params.project_id;
         $rootScope.router = $routeParams
@@ -35,5 +35,8 @@ angular.module('BHF')
                     refresh(data);
                 }
             });
+        }
+        $scope.tohtml = function(str){
+           return $sce.trustAsHtml(str);
         }
     })
