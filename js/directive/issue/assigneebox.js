@@ -3,10 +3,10 @@
 angular.module('BHF')
     .directive('assigneebox', function ($rootScope, API) {
         var dpOpt = {
-            format: 'yyyy-mm-dd HH:ii', //时间格式
+            format: 'yyyy-mm-dd', //时间格式
             autoclose: true, //点击后立刻关闭
             language: "zh-CN", //语言包
-            minView: "0", //时间最小粒度
+            minView: "3", //时间最小粒度
             weekStart: 1 //一周从星期一开始
         };
 
@@ -35,7 +35,7 @@ angular.module('BHF')
                     issue = data.issue;
                     $scope.top = position.top;
                     $scope.left = position.left;
-                    $scope.due_date = moment(issue.du || moment()).format("YYYY-MM-DD HH:mm:ss");
+                    $scope.due_date = issue.due?moment(issue.due).format("YYYY-MM-DD"):"";
                     $scope.owener = issue.owner_name;
                     //保存初始值
                     $scope.assigninfo.due = $scope.due_date;
@@ -67,6 +67,12 @@ angular.module('BHF')
                     $scope.assigninfo.member = {};
                     $scope.assigninfo.due = "";
                 }
+                $scope.$watch('due_date',function(newValue,oldValue){
+                    if(newValue !==oldValue){
+                        $scope.due_date = newValue;
+                        $scope.assigninfo.due = newValue;
+                    }
+                })
 
                 // 向后台提交数据
                 $scope.set_owner_due = function () {
