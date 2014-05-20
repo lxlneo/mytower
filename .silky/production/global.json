@@ -1,6 +1,7 @@
 {
-    "title": "Silky",
+    "title": "BHF",
     "root": "",
     "keyword": "keyword",
-    "description": "description"
+    "description": "description",
+    "dev": "false"
 }
