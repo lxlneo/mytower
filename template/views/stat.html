@@ -2,12 +2,12 @@
     <div class="page-inner">
         <!--栏目标题-->
         <proheader></proheader>
-
     </div>
-    <div id="page-project-stat" data-page-name="数据统计" class="page sheet sheet-active sheet-1" data-url="/projects/02efed7428204733b4cef508f6220b6b/stat/" data-since="2014-05-16 17:49:42 +0800">
+    <div id="page-project-stat"  style="border-top-width: 0px;" class="page sheet sheet-active sheet-1">
         <div class="page-inner">
             <div class="title">
                 <h3>项目统计</h3>
+
                 <p class="date">截止 {{today}}</p>
             </div>
 
@@ -23,7 +23,7 @@
                     </li>
                     <li class="ratio last">
                         <span class="name">延误率%</span>
-                        <span class="count">{{stat.overview.delay / stat.overview.total}}</span>
+                        <span class="count">{{stat.overview.delay / stat.overview.total|number:2}}</span>
                     </li>
                 </ul>
 
@@ -40,7 +40,8 @@
                         <tbody>
                         <tr ng-repeat="item in stat.members">
                             <td class="member">
-                                <img class="avatar" alt="{{item.profile.realname}}" src="https://avatar.tower.im/123fc3f828944a8a9a32fcc055c536fe">
+                                <img class="avatar" alt="{{item.profile.realname}}"
+                                     src="https://avatar.tower.im/123fc3f828944a8a9a32fcc055c536fe">
                                 <span class="name">{{item.profile.realname}}</span>
                             </td>
                             <td>
