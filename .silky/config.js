@@ -30,6 +30,12 @@ module.exports = {
         },
         //将要复制的文件目录，直接复制到目标
         copy: ["images"],
+        //重命名
+        rename: [
+            {
+                source: /source\.(js)$/i, target: '$1'
+            }
+        ],
         //将要编译处理的目录，如果存在less/coffee，则会直接编译
         compile: {
             //将template直接输出到目标目录下
@@ -40,11 +46,14 @@ module.exports = {
                 ignore: /module$/i
             },
             //编译js目录
-            "js": {},
+            "js": {
+                //不编译直接复制的文件
+                copy: /\.min\.js$/i
+            },
             //编译css目录
             "css": {
                 //忽略目标目录
-                ignore: /module$/i
+                ignore: /(module)$/i
             }
         }
     },
