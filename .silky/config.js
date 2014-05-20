@@ -15,21 +15,23 @@ module.exports = {
     "replaceSource": true,
     //build的配置
     build: {
+        //要忽略的文件
+        ignore: [/\.DS_Store$/i],
         //构建的目标目录，命令行指定的优先
         output: "./build",
         //是否压缩
         compress: {
             //压缩js，包括coffee
-            js: true,
+            js: false,
             //压缩css，包括less
-            css: true,
+            css: false,
             //压缩html
             html: false,
             //是否压缩internal的js
             internal: false
         },
         //将要复制的文件目录，直接复制到目标
-        copy: ["images"],
+        copy: ["images", "fonts"],
         //重命名
         rename: [
             {
@@ -48,7 +50,7 @@ module.exports = {
             //编译js目录
             "js": {
                 //不编译直接复制的文件
-                copy: /\.min\.js$/i
+                copy: [/\.min\.js$/i, /angular\.source\.js/, /bootstrap\.source\.js/, /datetimepicker\.source\.js/, /messenger\-min\.source\.js/, /moment\.js/]
             },
             //编译css目录
             "css": {
