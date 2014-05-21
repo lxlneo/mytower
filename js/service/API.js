@@ -5,7 +5,7 @@ angular.module('BHF')
         var api = '/api/',
             root = '/api/',
             canceler
-
+            
         return {
             //执行ajax操作
             doAction: function (api, data, method, cb, options) {
