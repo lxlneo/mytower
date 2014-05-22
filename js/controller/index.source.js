@@ -11,7 +11,6 @@ angular.module('BHF')
 
         function getuserInfo(){
             API.doAction("mine", {}, function (data) {
-                console.log(data)
                 $scope.user = data;
                 USER.setUser(data);
             });

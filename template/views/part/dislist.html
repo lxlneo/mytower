@@ -1,7 +1,7 @@
 <div class="messages">
     <div class="message" ng-repeat="item in data.items track by $index ">
         <a href="" data-stack="" data-stack-root="">
-            <img class="avatar" ng-src="/images/member/{{item.realname |  nameToImageSrc}}.png">
+            <img class="avatar" ng-src="/images/member/{{item.creator}}.png">
         </a>
         <div class="name">
             <a data-stack="" data-stack-root="" href="/#/member/{{item.creator}}">{{item.realname}}</a>
