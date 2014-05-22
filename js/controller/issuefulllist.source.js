@@ -11,7 +11,6 @@ angular.module('BHF')
         $scope.filter_tag = $scope.router.tag;
         $scope.$on("issue:filter", function (evnet,data) {
             data.limit = 50;
-            console.log(data);
             $scope.$broadcast("issue:save", data);
         })
     })
