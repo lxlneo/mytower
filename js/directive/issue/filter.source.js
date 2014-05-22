@@ -10,7 +10,8 @@ angular.module('BHF')
                 API.doAction('member', {}, function(data){
                     $scope.memberList = data
                 });
-               // var data = {tag:"",status:""};
+             //   var data = {tag:"",status:""};
+                
                 var data = {
                     tag:$scope.filter_tag,
                     status:$scope.filter_status

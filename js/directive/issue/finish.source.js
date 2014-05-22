@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('finishtodo', function (API) {
+    .directive('finishtodo', function ($location,API) {
         return{
             templateUrl: "views/part/issue/tofinish.html",
             restrict: "E",
@@ -22,12 +22,12 @@ angular.module('BHF')
 
                 //更新状态
                 function _update_status(status) {
-                    API.doAction('project/' + issue.project_id + '/issue/' + issue.id + '/status', {status: status}, "PUT", function (data) {
-                        $scope.$emit('filter:init');
-                        if($scope.done){
-                            alert('骚年不错啊！');
+                    console.log("do in task is" + status)
+                    API.doAction('project/' + issue.project_id + '/issue/' + issue.id + '/status', {status: status}, "PUT", function (data) {     
+                        if($location.url().indexOf("issue/tag") !== -1){
+                            $scope.$emit('filter:init');
                         }else{
-                            alert('少年再努力一下!')
+                            $scope.$emit('issue:save');
                         }
                     });
                 }
