@@ -15,7 +15,7 @@
         <div class="comments streams">
             <div class="comment" ng-repeat="item in commits track by $index">
                 <a class="avatar-wrap" href="/members/d2a7ff82d9f54eb696b6ad2a01402be5/" data-stack="" data-stack-root="">
-                    <img class="avatar" src="/images/path.jpg" width="50" height="50">
+                    <img class="avatar"  ng-src="/images/member/{{item.creator}}.png" width="50" height="50">
                 </a>
                 <div class="comment-actions actions">
                     <!--<a href="" class="edit" style="display:inline;">编辑</a>

@@ -18,7 +18,7 @@ angular.module('BHF')
                     $scope.newissue = true;
                 }
 
-                $scope.submit = function(){
+                var submit = function($scope){
                     //这种方式只是一个临时的解决方案，是不可行的
                     //var tag = $el.parent().parent().parent().attr('data-tag');
                     if(!$scope.issue_textarea) return alert('亲，太没节操了，内容必需输入哇')
@@ -35,6 +35,10 @@ angular.module('BHF')
                         reset_edit();
                     })
                 }
+                
+                $scope.submit = function(){
+                    submit($scope);
+                }
 
                 $scope.$on('issue:filledit',function(e,data){
                     $scope.showform = true;
@@ -43,6 +47,14 @@ angular.module('BHF')
                     $scope.issue_textarea = data.title;
                     issue_obj = data;
                 })
+
+                $scope.enterSubmit = function(e){
+                    if(e.keyCode !== 13){
+                        return;
+                    }
+                    //console.log($scope.issue_textarea);
+                    submit($scope);
+                }
 
                 function reset_edit(){
                     $scope.issue_textarea = "";

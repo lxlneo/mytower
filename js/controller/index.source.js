@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .controller('C_index', function ($scope, API) {
+    .controller('C_index', function ($scope, API,USER) {
         function getprolist(){
             API.doAction("project", {}, function (data) {
                 $scope.prolist = data.items;
@@ -12,8 +12,11 @@ angular.module('BHF')
         function getuserInfo(){
             API.doAction("mine", {}, function (data) {
                 $scope.user = data;
+                USER.setUser(data);
             });
         }
+
+        getuserInfo();
 
         $scope.delproject = function($event){
             $event.preventDefault();
