@@ -2,6 +2,11 @@
 
 angular.module('BHF')
     .controller('C_login', function ($scope, API) {
+        /*
+        var remenberMember = function(data){
+            $cookie.member = JSON.stringify(data);
+        }
+    */
         $scope.login = function(e){
             e.preventDefault();
 
