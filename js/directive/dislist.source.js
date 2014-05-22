@@ -13,6 +13,7 @@ angular.module('BHF')
                 function refresh(_data){
                     _data = angular.extend(data,_data);
                     API.doAction(api, _data, function(data){
+                        console.log(data);
                         $scope.data = data;
                         $scope.show_dis_more = data.pagination.count > 0;
                     })
