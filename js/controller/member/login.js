@@ -3,8 +3,10 @@
 angular.module('BHF')
     .controller('C_login', function ($scope, API) {
         $scope.login = function(e){
-            e.preventDefault()
+            e.preventDefault();
 
+            $scope.$broadcast("autofill:update");
+            
             var data = {
                 password: $scope.password || '',
                 account: $scope.account || ''
