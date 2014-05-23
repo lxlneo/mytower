@@ -20,7 +20,8 @@ angular.module('BHF')
 
             remenberMember(data)
 
-            API.doAction('mine', data, 'PUT', function(){
+            API.doAction('mine', data, 'PUT', function(data){
+                $cookies.member_id = data.member_id
                 location.href = '/'
             }); 
         }
@@ -30,7 +31,6 @@ angular.module('BHF')
                 $cookies.member = void(0);
                 return;
             }
-            $cookies.member = JSON.stringify(data);
         }
 
         initLoginForm = function(){
