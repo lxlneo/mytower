@@ -34,7 +34,10 @@
                                             <span class="label completed-member">( {{item.member.realname}} <span class="completed-time" data-abstime="2014-05-09 09:26:52 +0800">{{issue.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span> )</span>
                                             <a href="#/project/{{issue.project_id}}" class="label todo-proj" data-stack-root="true" data-stack="true" title="{{issue.project_name}}">{{issue.project_name}}</a>
                                             <span class="label">
-                                                    <span>{{issue.tag}}</span>
+                                                <span>{{issue.tag}}</span>
+                                           </span>
+                                           <span class="label">
+                                                <span>{{issue.finish_time | toWeekday }}</span>
                                            </span>
                                         </div>
                                     </li>
