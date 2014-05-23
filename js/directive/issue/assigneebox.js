@@ -79,7 +79,7 @@ angular.module('BHF')
                     var data = {owner: "", plan_finish_time: ""};
                     data.owner = $scope.assigninfo.member.id||"";
                     data.plan_finish_time = $scope.assigninfo.due ? moment($scope.assigninfo.due).unix() * 1000 : '';
-                    var url = "project/" + $scope.router.project_id + "/issue/" + issue.id+"";
+                    var url = "project/" + $scope.router.project_id + "/issue/" + issue.id + "/plan";
                     API.doAction(url, data, 'PUT', function (_data) {
                         // 清空assignbox
                         $scope.hide_assignee_box();
