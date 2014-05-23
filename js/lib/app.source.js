@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module("BHF", ["ngRoute", "angularFileUpload"])
+angular.module("BHF", ["ngRoute","ngCookies", "angularFileUpload"])
     .config(function($routeProvider, $httpProvider){
         $routeProvider
             .when('/index', {
