@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('finishtodo', function ($location,API) {
+    .directive('finishtodo', function (API) {
         return{
             templateUrl: "views/part/issue/tofinish.html",
             restrict: "E",
@@ -24,11 +24,7 @@ angular.module('BHF')
                 function _update_status(status) {
                     console.log("do in task is" + status)
                     API.doAction('project/' + issue.project_id + '/issue/' + issue.id + '/status', {status: status}, "PUT", function (data) {     
-                        if($location.url().indexOf("issue/tag") !== -1){
-                            $scope.$emit('filter:init');
-                        }else{
-                            $scope.$emit('issue:save');
-                        }
+                        $scope.$emit('issue:save');
                     });
                 }
             }

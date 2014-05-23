@@ -11,10 +11,12 @@ angular.module('BHF')
                     $scope.tags = ['bug', '需求', '支持', '功能'];
                 }
                 refresh();
+                /*
                 $scope.$on('issue:listrefresh',function(){
                     $scope.tags = [];
                     $timeout(function(){$scope.tags = ['bug', '需求', '支持', '功能']},500);
                 })
+                */
             }
         }
     })

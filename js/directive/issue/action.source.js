@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('todosaction', function ($location,API) {
+    .directive('todosaction', function (API) {
         return{
             templateUrl: "views/part/issue/action.html",
             restrict: "E",
@@ -14,13 +14,7 @@ angular.module('BHF')
                 //更新状态
                 function _update_status(status) {
                     API.doAction('project/' + issue.project_id +'/issue/' + issue.id + '/status', {status: status}, "PUT", function (data) {
-                       // $scope.$emit('issue:save');
-                       // $scope.$emit('filter:init');
-                       if($location.url().indexOf("issue/tag") !== -1){
-                            $scope.$emit('filter:init');
-                        }else{
-                            $scope.$emit('issue:save');
-                        }
+                        $scope.$emit('issue:save');
                     });
                 }
 

@@ -28,9 +28,12 @@ angular.module('BHF')
                         $scope.$emit("issue:filter",data);
                     }
                 })
-                
+
                 $scope.$on('filter:init',function(){
-                    console.log('filter init emit')
+                    var data = {
+                        tag:$scope.filter_tag,
+                        status:$scope.filter_status
+                    }
                     $scope.$emit("issue:filter",data);
                 })
 
