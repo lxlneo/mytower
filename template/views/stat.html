@@ -13,6 +13,10 @@
 
             <div class="todo-stats">
                 <ul class="summary">
+                    <li class="commit">
+                        <span class="name">commit</span>
+                        <span class="count">{{stat.overview.commit}}</span>
+                    </li>
                     <li class="total">
                         <span class="name">总任务数</span>
                         <span class="count">{{stat.overview.total}}</span>
@@ -32,6 +36,7 @@
                         <thead>
                         <tr>
                             <th class="member">成员</th>
+                            <th>commit</th>
                             <th>任务数</th>
                             <th>已完成</th>
                             <th style="color: red;">延误</th>
@@ -41,8 +46,11 @@
                         <tr ng-repeat="item in stat.members">
                             <td class="member">
                                 <img class="avatar" alt="{{item.profile.realname}}"
-                                     src="https://avatar.tower.im/123fc3f828944a8a9a32fcc055c536fe">
+                                     src="/images/member/{{item.profile.id}}.png">
                                 <span class="name">{{item.profile.realname}}</span>
+                            </td>
+                             <td>
+                                {{item.stat.commit}}
                             </td>
                             <td>
                                 {{item.stat.total}}

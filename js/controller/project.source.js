@@ -5,6 +5,7 @@ angular.module('BHF')
         $scope.router = $routeParams;
         $rootScope.project_id = $scope.router.project_id;
         $scope.$on('assign:save',function(event,data){
-            $scope.$broadcast('issue:listrefresh');
+            //$scope.$broadcast('issue:listrefresh');
+            $scope.$broadcast('issue:save')
         })
     })

@@ -2,7 +2,7 @@
     <div class="file-list">
         <div class="file" ng-repeat="file in filelist.items">
             <div class="file-thumb">
-                <a href="" target="_blank" data-origin-size="64,88"> <img title="{{file.original_name}}" src="/images/file_extension/file_extension_{{file.file_name | findFileType }}.png" title="">
+                <a href="" target="_blank" data-origin-size="64,88" href='/api{{file.url}}'> <img title="{{file.original_name}}" src="/images/file_extension/file_extension_{{file.file_name | findFileType }}.png" title="">
                 </a>
             </div>
             <div class="file-info">

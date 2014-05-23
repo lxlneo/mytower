@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('todos', function($location,API){
+    .directive('todos', function(API){
         return{
             templateUrl: "views/part/todo/todos.html",
             restrict: "E",
@@ -23,20 +23,26 @@ angular.module('BHF')
                 }
 
                 //当issue被保存
-                $scope.$on('issue:save', function(event,data){
-                    console.log('issue:save init emit')
-                    loadIssue(data);
+                $scope.$on('issue:save', function(event){
+                    console.log('issue:save init emit');
+                    //判断是否存在过滤器
+                    if($scope.router.tag !== void(0)){
+                        $scope.$broadcast('filter:init');
+                    }else{
+                        loadIssue();
+                    }
                 })
+
+                //issue refresh
+                $scope.$on('issue:refresh',function(event,data){
+                    loadIssue(data);
+                });
 
                 $scope.$on('issue:showedit',function(e,data){
                     $scope.$broadcast('issue:filledit',data);
                 })
-                //触发 filter过滤 初始化. 由于自定义指令编译顺序问题,主view编译完成触发事件后,todos未编译完成,因此无法监听事件
-                if($location.url().indexOf("issue/tag") !== -1){
-                    $scope.$broadcast('filter:init');
-                }else{
-                    loadIssue();
-                }
+
+                $scope.$broadcast('issue:save');
                 
             }
         }
