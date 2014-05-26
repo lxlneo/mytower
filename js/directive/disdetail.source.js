@@ -32,7 +32,8 @@ angular.module('BHF')
                         alert("内容必填哦~");
                         return;
                     }
-                    var url = "project/" + $scope.project_id + "/issue"
+                    var url = "project/" + $scope.project_id + "/issue";
+
                     API.doAction(url, data, "POST", function (data) {
                         if(data.id) {
                             $rootScope.$broadcast('discusslist:update');
@@ -43,3 +44,4 @@ angular.module('BHF')
             }
         }
     })
+    
