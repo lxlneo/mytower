@@ -8,9 +8,23 @@ module.exports = {
     proxy: {
         forward: {
             //定义代理转发
-            "/api": "http://172.31.11.59:4000/"
+            "/api": "http://172.31.11.59:8000/"
         }
     },
+    //实时刷新
+    livereload: {
+        //实时刷新的环境，支持数组，如['development', 'production']
+        env: ['development'],
+        //是否以amd的方式加载socket.io以及main.js
+        amd: false
+    },
+    //路由
+    routers: [
+        {
+            //path: 原路径，to: 替换后的路径，next：是否继承执行下一个路由替换
+            path: /^\/$/, to: 'index.html', next: true
+        }
+    ],
     //替换掉文件名中的source
     "replaceSource": true,
     //build的配置
