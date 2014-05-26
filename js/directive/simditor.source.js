@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .directive('simditor', function($location,$window,API){
+    .directive('simditor', function($window,API){
         return{
             templateUrl: "views/part/simditor.html",
             restrict: "E",

@@ -439,7 +439,7 @@
 }).call(this);
 
 (function() {
-  var BlockquoteButton, BoldButton, Button, CodeButton, CodePopover, Formatter, HrButton, ImageButton, ImagePopover, IndentButton, InputManager, ItalicButton, Keystroke, LinkButton, LinkPopover, ListButton, OrderListButton, OutdentButton, Popover, Selection, Simditor, StrikethroughButton, TableButton, Test, TestPlugin, TitleButton, Toolbar, UnderlineButton, UndoManager, UnorderListButton, Util, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref18, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
+  var BlockquoteButton, BoldButton, Button, CodeButton, CodePopover, Formatter, HrButton, ImageButton, ImagePopover, IndentButton, InputManager, ItalicButton, Keystroke, LinkButton, LinkPopover, ListButton, OrderListButton, OutdentButton, Popover, Selection, Simditor, StrikethroughButton, TableButton, Test, TestPlugin, TitleButton, Toolbar, UnderlineButton, UndoManager, UnorderListButton, Util, _ref, _ref1, _ref10, _ref11, _ref12, _ref13, _ref14, _ref15, _ref16, _ref17, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7, _ref8, _ref9,
     __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
     __slice = [].slice,
@@ -478,7 +478,10 @@
 
     Selection.prototype.selectRange = function(range) {
       this.clear();
-      return this.sel.addRange(range);
+      this.sel.addRange(range);
+      if (!this.editor.inputManager.focused && (this.editor.util.browser.firefox || this.editor.util.browser.msie)) {
+        return this.editor.body.focus();
+      }
     };
 
     Selection.prototype.rangeAtEndOf = function(node, range) {
@@ -628,10 +631,23 @@
     };
 
     Selection.prototype.deleteRangeContents = function(range) {
+      var endRange, startRange;
       if (range == null) {
         range = this.getRange();
       }
-      return range.deleteContents();
+      startRange = range.cloneRange();
+      endRange = range.cloneRange();
+      startRange.collapse(true);
+      endRange.collapse();
+      if (!range.collapsed && this.rangeAtStartOf(this.editor.body, startRange) && this.rangeAtEndOf(this.editor.body, endRange)) {
+        this.editor.body.empty();
+        range.setStart(this.editor.body[0], 0);
+        range.collapse(true);
+        this.selectRange(range);
+      } else {
+        range.deleteContents();
+      }
+      return range;
     };
 
     Selection.prototype.breakBlockEl = function(el, range) {
@@ -650,12 +666,14 @@
       return $el.before(range.extractContents());
     };
 
-    Selection.prototype.save = function() {
-      var endCaret, range, startCaret;
+    Selection.prototype.save = function(range) {
+      var endCaret, startCaret;
+      if (range == null) {
+        range = this.getRange();
+      }
       if (this._selectionSaved) {
         return;
       }
-      range = this.getRange();
       startCaret = $('<span/>').addClass('simditor-caret-start');
       endCaret = $('<span/>').addClass('simditor-caret-end');
       range.insertNode(startCaret[0]);
@@ -686,9 +704,6 @@
         startCaret.remove();
         endCaret.remove();
         this.selectRange(range);
-        if (this.editor.util.browser.firefox || this.editor.util.browser.msie) {
-          this.editor.body.focus();
-        }
       } else {
         startCaret.remove();
         endCaret.remove();
@@ -723,9 +738,9 @@
     Formatter.prototype._allowedTags = ['br', 'a', 'img', 'b', 'strong', 'i', 'u', 'p', 'ul', 'ol', 'li', 'blockquote', 'pre', 'h1', 'h2', 'h3', 'h4', 'hr'];
 
     Formatter.prototype._allowedAttributes = {
-      img: ['src', 'alt', 'width', 'height', 'data-origin-src', 'data-origin-size', 'data-origin-name'],
+      img: ['src', 'alt', 'width', 'height', 'data-image-src', 'data-image-size', 'data-image-name', 'data-non-image'],
       a: ['href', 'target'],
-      pre: ['data-lang'],
+      pre: ['data-lang', 'class'],
       p: ['data-indent'],
       h1: ['data-indent'],
       h2: ['data-indent'],
@@ -769,7 +784,7 @@
         });
       };
       findLinkNode($el);
-      re = /(https?:\/\/|www\.)[\w\-\.\?&=\/#%:]+/ig;
+      re = /(https?:\/\/|www\.)[\w\-\.\?&=\/#%:\!]+/ig;
       for (_i = 0, _len = linkNodes.length; _i < _len; _i++) {
         $node = linkNodes[_i];
         text = $node.text();
@@ -811,7 +826,7 @@
             blockNode = null;
           }
           $node.remove();
-        } else if (this.editor.util.isBlockNode(node) || $node.is('img')) {
+        } else if (this.editor.util.isBlockNode(node) || $node.is('img:not([data-non-image])')) {
           if ($node.is('li')) {
             if (blockNode && blockNode.is('ul, ol')) {
               blockNode.append(node);
@@ -982,14 +997,22 @@
       }).addClass('simditor-paste-area').appendTo(this.editor.el);
       this.editor.on('valuechanged', function() {
         return _this.editor.body.find('hr, pre, .simditor-image, .simditor-table').each(function(i, el) {
-          var $el;
+          var $el, formatted;
           $el = $(el);
           if ($el.parent().is('blockquote') || $el.parent()[0] === _this.editor.body[0]) {
+            formatted = false;
             if ($el.next().length === 0) {
               $('<p/>').append(_this.editor.util.phBr).insertAfter($el);
+              formatted = true;
             }
             if ($el.prev().length === 0) {
-              return $('<p/>').append(_this.editor.util.phBr).insertBefore($el);
+              $('<p/>').append(_this.editor.util.phBr).insertBefore($el);
+              formatted = true;
+            }
+            if (formatted) {
+              return setTimeout(function() {
+                return _this.editor.trigger('valuechanged');
+              }, 10);
             }
           }
         });
@@ -1102,33 +1125,8 @@
     };
 
     InputManager.prototype._onKeyPress = function(e) {
-      var cmd, hook, _i, _len, _ref, _results;
       if (this.editor.triggerHandler(e) === false) {
         return false;
-      }
-      if (e.which === 13) {
-        this._hookStack.length = 0;
-      }
-      if (e.which === 32) {
-        cmd = this._hookStack.join('');
-        this._hookStack.length = 0;
-        _ref = this._inputHooks;
-        _results = [];
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          hook = _ref[_i];
-          if ((hook.cmd instanceof RegExp && hook.cmd.test(cmd)) || hook.cmd === cmd) {
-            hook.callback(e, hook, cmd);
-            break;
-          } else {
-            _results.push(void 0);
-          }
-        }
-        return _results;
-      } else if (this._hookKeyMap[e.which]) {
-        this._hookStack.push(this._hookKeyMap[e.which]);
-        if (this._hookStack.length > 10) {
-          return this._hookStack.shift();
-        }
       }
     };
 
@@ -1150,7 +1148,7 @@
     };
 
     InputManager.prototype._onPaste = function(e) {
-      var $blockEl, cleanPaste, imageFile, pasteItem, uploadOpt, _ref,
+      var $blockEl, cleanPaste, imageFile, pasteItem, range, uploadOpt, _ref,
         _this = this;
       if (this.editor.triggerHandler(e) === false) {
         return false;
@@ -1173,20 +1171,20 @@
           return false;
         }
       }
+      range = this.editor.selection.deleteRangeContents();
+      if (!range.collapsed) {
+        range.collapse(true);
+      }
       $blockEl = this.editor.util.closestBlockEl();
       cleanPaste = $blockEl.is('pre, table');
-      this.editor.selection.deleteRangeContents();
-      this.editor.selection.save();
+      this.editor.selection.save(range);
       this._pasteArea.focus();
       return setTimeout(function() {
-        var $img, blob, children, insertPosition, node, pasteContent, range, _i, _j, _len, _len1, _ref1, _ref2;
+        var $img, blob, children, insertPosition, lastLine, line, lines, node, pasteContent, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref1, _ref2;
         if (_this._pasteArea.is(':empty')) {
           pasteContent = null;
         } else if (cleanPaste) {
           pasteContent = _this.editor.formatter.clearHtml(_this._pasteArea.html());
-          if ($blockEl.is('table')) {
-            pasteContent = pasteContent.replace(/\n/g, '<br/>');
-          }
         } else {
           pasteContent = $('<div/>').append(_this._pasteArea.contents());
           _this.editor.formatter.format(pasteContent);
@@ -1202,28 +1200,44 @@
         if (!pasteContent) {
           return;
         } else if (cleanPaste) {
-          pasteContent = $('<div/>').append(pasteContent);
-          _ref1 = pasteContent.contents();
-          for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
-            node = _ref1[_i];
-            _this.editor.selection.insertNode($(node)[0], range);
+          if ($blockEl.is('table')) {
+            lines = pasteContent.split('\n');
+            lastLine = lines.pop();
+            for (_i = 0, _len = lines.length; _i < _len; _i++) {
+              line = lines[_i];
+              _this.editor.selection.insertNode(document.createTextNode(line));
+              _this.editor.selection.insertNode($('<br/>'));
+            }
+            _this.editor.selection.insertNode(document.createTextNode(lastLine));
+          } else {
+            pasteContent = $('<div/>').text(pasteContent);
+            _ref1 = pasteContent.contents();
+            for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+              node = _ref1[_j];
+              _this.editor.selection.insertNode($(node)[0], range);
+            }
+          }
+        } else if ($blockEl.is(_this.editor.body)) {
+          for (_k = 0, _len2 = pasteContent.length; _k < _len2; _k++) {
+            node = pasteContent[_k];
+            _this.editor.selection.insertNode(node, range);
           }
         } else if (pasteContent.length < 1) {
           return;
         } else if (pasteContent.length === 1) {
           if (pasteContent.is('p')) {
             children = pasteContent.contents();
-            for (_j = 0, _len1 = children.length; _j < _len1; _j++) {
-              node = children[_j];
+            for (_l = 0, _len3 = children.length; _l < _len3; _l++) {
+              node = children[_l];
               _this.editor.selection.insertNode(node, range);
             }
           } else if (pasteContent.is('.simditor-image')) {
             $img = pasteContent.find('img');
-            if (dataURLtoBlob && /^data:image\/png;base64/.test($img.attr('src'))) {
+            if (/^data:image/.test($img.attr('src'))) {
               if (!_this.opts.pasteImage) {
                 return;
               }
-              blob = dataURLtoBlob($img.attr("src"));
+              blob = _this.editor.util.dataURLtoBlob($img.attr("src"));
               blob.name = "来自剪贴板的图片.png";
               uploadOpt = {};
               uploadOpt[_this.opts.pasteImage] = true;
@@ -1273,17 +1287,6 @@
       return this._keystrokeHandlers[key][node] = handler;
     };
 
-    InputManager.prototype._inputHooks = [];
-
-    InputManager.prototype._hookKeyMap = {};
-
-    InputManager.prototype._hookStack = [];
-
-    InputManager.prototype.addInputHook = function(hookOpt) {
-      $.extend(this._hookKeyMap, hookOpt.key);
-      return this._inputHooks.push(hookOpt);
-    };
-
     InputManager.prototype._shortcuts = {
       'cmd+13': function(e) {
         this.editor.el.closest('form').find('button:submit').click();
@@ -1312,7 +1315,8 @@
     }
 
     Keystroke.prototype._init = function() {
-      var _this = this;
+      var titleEnterHandler,
+        _this = this;
       if (this.editor.util.browser.safari) {
         this.editor.inputManager.addKeystrokeHandler('13', '*', function(e) {
           var $br;
@@ -1329,6 +1333,23 @@
           }
           return true;
         });
+      }
+      if (this.editor.util.browser.webkit || this.editor.util.browser.msie) {
+        titleEnterHandler = function(e, $node) {
+          var $p;
+          if (!_this.editor.selection.rangeAtEndOf($node)) {
+            return;
+          }
+          $p = $('<p/>').append(_this.editor.util.phBr).insertAfter($node);
+          _this.editor.selection.setRangeAtStartOf($p);
+          return true;
+        };
+        this.editor.inputManager.addKeystrokeHandler('13', 'h1', titleEnterHandler);
+        this.editor.inputManager.addKeystrokeHandler('13', 'h2', titleEnterHandler);
+        this.editor.inputManager.addKeystrokeHandler('13', 'h3', titleEnterHandler);
+        this.editor.inputManager.addKeystrokeHandler('13', 'h4', titleEnterHandler);
+        this.editor.inputManager.addKeystrokeHandler('13', 'h5', titleEnterHandler);
+        this.editor.inputManager.addKeystrokeHandler('13', 'h6', titleEnterHandler);
       }
       this.editor.inputManager.addKeystrokeHandler('8', '*', function(e) {
         var $prevBlockEl, $rootBlock;
@@ -1515,9 +1536,12 @@
       if (this.editor.util.os.mac) {
         undoShortcut = 'cmd+90';
         redoShortcut = 'shift+cmd+90';
-      } else {
+      } else if (this.editor.util.os.win) {
         undoShortcut = 'ctrl+90';
         redoShortcut = 'ctrl+89';
+      } else {
+        undoShortcut = 'ctrl+90';
+        redoShortcut = 'shift+ctrl+90';
       }
       this.editor.inputManager.addShortcut(undoShortcut, function(e) {
         e.preventDefault();
@@ -1580,7 +1604,7 @@
       state = this._stack[this._index];
       this.editor.body.html(state.html);
       this.caretPosition(state.caret);
-      this.editor.find('.selected').removeClass('selected');
+      this.editor.body.find('.selected').removeClass('selected');
       this.editor.sync();
       this.editor.trigger('valuechanged', ['undo']);
       return this.editor.trigger('selectionchanged', ['undo']);
@@ -1596,7 +1620,7 @@
       state = this._stack[this._index];
       this.editor.body.html(state.html);
       this.caretPosition(state.caret);
-      this.editor.find('.selected').removeClass('selected');
+      this.editor.body.find('.selected').removeClass('selected');
       this.editor.sync();
       this.editor.trigger('valuechanged', ['undo']);
       return this.editor.trigger('selectionchanged', ['undo']);
@@ -2047,6 +2071,51 @@
       return true;
     };
 
+    Util.prototype.dataURLtoBlob = function(dataURL) {
+      var BlobBuilder, arrayBuffer, bb, byteString, hasArrayBufferViewSupport, hasBlobConstructor, i, intArray, mimeString, _i, _ref;
+      hasBlobConstructor = window.Blob && (function() {
+        var e;
+        try {
+          return Boolean(new Blob());
+        } catch (_error) {
+          e = _error;
+          return false;
+        }
+      })();
+      hasArrayBufferViewSupport = hasBlobConstructor && window.Uint8Array && (function() {
+        var e;
+        try {
+          return new Blob([new Uint8Array(100)]).size === 100;
+        } catch (_error) {
+          e = _error;
+          return false;
+        }
+      })();
+      BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder || window.MozBlobBuilder || window.MSBlobBuilder;
+      if (!((hasBlobConstructor || BlobBuilder) && window.atob && window.ArrayBuffer && window.Uint8Array)) {
+        return false;
+      }
+      if (dataURL.split(',')[0].indexOf('base64') >= 0) {
+        byteString = atob(dataURL.split(',')[1]);
+      } else {
+        byteString = decodeURIComponent(dataURL.split(',')[1]);
+      }
+      arrayBuffer = new ArrayBuffer(byteString.length);
+      intArray = new Uint8Array(arrayBuffer);
+      for (i = _i = 0, _ref = byteString.length; 0 <= _ref ? _i <= _ref : _i >= _ref; i = 0 <= _ref ? ++_i : --_i) {
+        intArray[i] = byteString.charCodeAt(i);
+      }
+      mimeString = dataURL.split(',')[0].split(':')[1].split(';')[0];
+      if (hasBlobConstructor) {
+        return new Blob([hasArrayBufferViewSupport ? intArray : arrayBuffer], {
+          type: mimeString
+        });
+      }
+      bb = new BlobBuilder();
+      bb.append(arrayBuffer);
+      return bb.getBlob(mimeString);
+    };
+
     return Util;
 
   })(Plugin);
@@ -2320,12 +2389,12 @@
       children = cloneBody.children();
       lastP = children.last('p');
       firstP = children.first('p');
-      while (lastP.is('p') && !lastP.text() && !lastP.find('img').length) {
+      while (lastP.is('p') && this.util.isEmptyNode(lastP)) {
         emptyP = lastP;
         lastP = lastP.prev('p');
         emptyP.remove();
       }
-      while (firstP.is('p') && !firstP.text() && !firstP.find('img').length) {
+      while (firstP.is('p') && this.util.isEmptyNode(firstP)) {
         emptyP = firstP;
         firstP = lastP.next('p');
         emptyP.remove();
@@ -2441,10 +2510,19 @@
       this.editor = editor;
       this.render();
       this.el.on('mousedown', function(e) {
-        var param;
+        var exceed, param;
         e.preventDefault();
         if (_this.menu) {
           _this.wrapper.toggleClass('menu-on').siblings('li').removeClass('menu-on');
+          if (_this.wrapper.is('.menu-on')) {
+            exceed = _this.menuWrapper.offset().left + _this.menuWrapper.outerWidth() + 5 - _this.editor.wrapper.offset().left - _this.editor.wrapper.outerWidth();
+            if (exceed > 0) {
+              _this.menuWrapper.css({
+                'left': 'auto',
+                'right': 0
+              });
+            }
+          }
           return false;
         }
         if (_this.el.hasClass('disabled') || (_this.needFocus && !_this.editor.inputManager.focused)) {
@@ -2662,6 +2740,8 @@
 
   })(Module);
 
+  window.SimditorPopover = Popover;
+
   TitleButton = (function(_super) {
     __extends(TitleButton, _super);
 
@@ -2794,6 +2874,16 @@
 
     BoldButton.prototype.shortcut = 'cmd+66';
 
+    BoldButton.prototype.render = function() {
+      if (this.editor.util.os.mac) {
+        this.title = this.title + ' ( Cmd + b )';
+      } else {
+        this.title = this.title + ' ( Ctrl + b )';
+        this.shortcut = 'ctrl+66';
+      }
+      return BoldButton.__super__.render.call(this);
+    };
+
     BoldButton.prototype.status = function($node) {
       var active;
       if ($node != null) {
@@ -2839,6 +2929,16 @@
 
     ItalicButton.prototype.shortcut = 'cmd+73';
 
+    ItalicButton.prototype.render = function() {
+      if (this.editor.util.os.mac) {
+        this.title = this.title + ' ( Cmd + i )';
+      } else {
+        this.title = this.title + ' ( Ctrl + i )';
+        this.shortcut = 'ctrl+73';
+      }
+      return ItalicButton.__super__.render.call(this);
+    };
+
     ItalicButton.prototype.status = function($node) {
       var active;
       if ($node != null) {
@@ -2883,6 +2983,16 @@
     UnderlineButton.prototype.disableTag = 'pre';
 
     UnderlineButton.prototype.shortcut = 'cmd+85';
+
+    UnderlineButton.prototype.render = function() {
+      if (this.editor.util.os.mac) {
+        this.title = this.title + ' ( Cmd + u )';
+      } else {
+        this.title = this.title + ' ( Ctrl + u )';
+        this.shortcut = 'ctrl+85';
+      }
+      return UnderlineButton.__super__.render.call(this);
+    };
 
     UnderlineButton.prototype.status = function($node) {
       var active;
@@ -3065,6 +3175,18 @@
 
     OrderListButton.prototype.htmlTag = 'ol';
 
+    OrderListButton.prototype.shortcut = 'cmd+191';
+
+    OrderListButton.prototype.render = function() {
+      if (this.editor.util.os.mac) {
+        this.title = this.title + ' ( Cmd + / )';
+      } else {
+        this.title = this.title + ' ( ctrl + / )';
+        this.shortcut = 'ctrl+191';
+      }
+      return OrderListButton.__super__.render.call(this);
+    };
+
     return OrderListButton;
 
   })(ListButton);
@@ -3086,6 +3208,18 @@
     UnorderListButton.prototype.icon = 'list-ul';
 
     UnorderListButton.prototype.htmlTag = 'ul';
+
+    UnorderListButton.prototype.shortcut = 'cmd+190';
+
+    UnorderListButton.prototype.render = function() {
+      if (this.editor.util.os.mac) {
+        this.title = this.title + ' ( Cmd + . )';
+      } else {
+        this.title = this.title + ' ( Ctrl + . )';
+        this.shortcut = 'ctrl+190';
+      }
+      return UnorderListButton.__super__.render.call(this);
+    };
 
     return UnorderListButton;
 
@@ -3175,11 +3309,6 @@
   CodeButton = (function(_super) {
     __extends(CodeButton, _super);
 
-    function CodeButton() {
-      _ref11 = CodeButton.__super__.constructor.apply(this, arguments);
-      return _ref11;
-    }
-
     CodeButton.prototype.name = 'code';
 
     CodeButton.prototype.icon = 'code';
@@ -3189,6 +3318,22 @@
     CodeButton.prototype.htmlTag = 'pre';
 
     CodeButton.prototype.disableTag = 'li, table';
+
+    function CodeButton(editor) {
+      var _this = this;
+      this.editor = editor;
+      CodeButton.__super__.constructor.call(this, this.editor);
+      this.editor.on('decorate', function(e, $el) {
+        return $el.find('pre').each(function(i, pre) {
+          return _this.decorate($(pre));
+        });
+      });
+      this.editor.on('undecorate', function(e, $el) {
+        return $el.find('pre').each(function(i, pre) {
+          return _this.undecorate($(pre));
+        });
+      });
+    }
 
     CodeButton.prototype.render = function() {
       var args;
@@ -3208,8 +3353,26 @@
       return result;
     };
 
+    CodeButton.prototype.decorate = function($pre) {
+      var lang;
+      lang = $pre.attr('data-lang');
+      $pre.removeClass();
+      if (lang && lang !== -1) {
+        return $pre.addClass('lang-' + lang);
+      }
+    };
+
+    CodeButton.prototype.undecorate = function($pre) {
+      var lang;
+      lang = $pre.attr('data-lang');
+      $pre.removeClass();
+      if (lang && lang !== -1) {
+        return $pre.addClass('lang-' + lang);
+      }
+    };
+
     CodeButton.prototype.command = function() {
-      var $contents, $endBlock, $startBlock, endNode, node, range, results, startNode, _i, _len, _ref12,
+      var $contents, $endBlock, $startBlock, endNode, node, range, results, startNode, _i, _len, _ref11,
         _this = this;
       range = this.editor.selection.getRange();
       startNode = range.startContainer;
@@ -3234,9 +3397,9 @@
         }
         return _results;
       });
-      _ref12 = results.reverse();
-      for (_i = 0, _len = _ref12.length; _i < _len; _i++) {
-        node = _ref12[_i];
+      _ref11 = results.reverse();
+      for (_i = 0, _len = _ref11.length; _i < _len; _i++) {
+        node = _ref11[_i];
         range.insertNode(node[0]);
       }
       this.editor.selection.setRangeAtEndOf(results[0]);
@@ -3257,7 +3420,7 @@
         } else {
           codeStr = this.editor.formatter.clearHtml($el);
         }
-        block = $('<' + this.htmlTag + '/>').append(codeStr);
+        block = $('<' + this.htmlTag + '/>').text(codeStr);
         results.push(block);
       }
       return results;
@@ -3271,8 +3434,8 @@
     __extends(CodePopover, _super);
 
     function CodePopover() {
-      _ref12 = CodePopover.__super__.constructor.apply(this, arguments);
-      return _ref12;
+      _ref11 = CodePopover.__super__.constructor.apply(this, arguments);
+      return _ref11;
     }
 
     CodePopover.prototype._tpl = "<div class=\"code-settings\">\n  <div class=\"settings-field\">\n    <select class=\"select-lang\">\n      <option value=\"-1\">选择程序语言</option>\n      <option value=\"c++\">C++</option>\n      <option value=\"css\">CSS</option>\n      <option value=\"coffeeScript\">CoffeeScript</option>\n      <option value=\"html\">Html,XML</option>\n      <option value=\"json\">JSON</option>\n      <option value=\"java\">Java</option>\n      <option value=\"js\">JavaScript</option>\n      <option value=\"markdown\">Markdown</option>\n      <option value=\"oc\">Objective C</option>\n      <option value=\"php\">PHP</option>\n      <option value=\"perl\">Perl</option>\n      <option value=\"python\">Python</option>\n      <option value=\"ruby\">Ruby</option>\n      <option value=\"sql\">SQL</option>\n    </select>\n  </div>\n</div>";
@@ -3282,13 +3445,16 @@
       this.el.addClass('code-popover').append(this._tpl);
       this.selectEl = this.el.find('.select-lang');
       return this.selectEl.on('change', function(e) {
-        var lang, oldLang;
-        lang = _this.selectEl.val();
-        oldLang = _this.target.attr('data-lang');
-        _this.target.removeClass('lang-' + oldLang).removeAttr('data-lang');
+        var selected;
+        _this.lang = _this.selectEl.val();
+        selected = _this.target.hasClass('selected');
+        _this.target.removeClass().removeAttr('data-lang');
         if (_this.lang !== -1) {
-          _this.target.addClass('lang-' + lang);
-          return _this.target.attr('data-lang', lang);
+          _this.target.addClass('lang-' + _this.lang);
+          _this.target.attr('data-lang', _this.lang);
+        }
+        if (selected) {
+          return _this.target.addClass('selected');
         }
       });
     };
@@ -3313,8 +3479,8 @@
     __extends(LinkButton, _super);
 
     function LinkButton() {
-      _ref13 = LinkButton.__super__.constructor.apply(this, arguments);
-      return _ref13;
+      _ref12 = LinkButton.__super__.constructor.apply(this, arguments);
+      return _ref12;
     }
 
     LinkButton.prototype.name = 'link';
@@ -3414,8 +3580,8 @@
     __extends(LinkPopover, _super);
 
     function LinkPopover() {
-      _ref14 = LinkPopover.__super__.constructor.apply(this, arguments);
-      return _ref14;
+      _ref13 = LinkPopover.__super__.constructor.apply(this, arguments);
+      return _ref13;
     }
 
     LinkPopover.prototype._tpl = "<div class=\"link-settings\">\n  <div class=\"settings-field\">\n    <label>文本</label>\n    <input class=\"link-text\" type=\"text\"/>\n    <a class=\"btn-unlink\" href=\"javascript:;\" title=\"取消链接\" tabindex=\"-1\"><span class=\"fa fa-unlink\"></span></a>\n  </div>\n  <div class=\"settings-field\">\n    <label>链接</label>\n    <input class=\"link-url\" type=\"text\"/>\n  </div>\n</div>";
@@ -3445,9 +3611,6 @@
             var range;
             range = document.createRange();
             _this.editor.selection.setRangeAfter(_this.target, range);
-            if (_this.editor.util.browser.firefox) {
-              _this.editor.body.focus();
-            }
             _this.hide();
             _this.editor.trigger('valuechanged');
             return _this.editor.trigger('selectionchanged');
@@ -3461,9 +3624,6 @@
         _this.hide();
         range = document.createRange();
         _this.editor.selection.setRangeAfter(txtNode, range);
-        if (_this.editor.util.browser.firefox && !_this.editor.inputManager.focused) {
-          _this.editor.body.focus();
-        }
         _this.editor.trigger('valuechanged');
         return _this.editor.trigger('selectionchanged');
       });
@@ -3525,12 +3685,12 @@
       this.maxWidth = this.editor.opts.maxImageWidth || this.editor.body.width();
       this.maxHeight = this.editor.opts.maxImageHeight || $(window).height();
       this.editor.on('decorate', function(e, $el) {
-        return $el.find('img').each(function(i, img) {
+        return $el.find('img:not([data-non-image])').each(function(i, img) {
           return _this.decorate($(img));
         });
       });
       this.editor.on('undecorate', function(e, $el) {
-        return $el.find('img').each(function(i, img) {
+        return $el.find('img:not([data-non-image])').each(function(i, img) {
           return _this.undecorate($(img));
         });
       });
@@ -3539,8 +3699,7 @@
         $imgWrapper = $(e.currentTarget);
         if ($imgWrapper.hasClass('selected')) {
           _this.popover.srcEl.blur();
-          _this.popover.hide();
-          $imgWrapper.removeClass('selected');
+          $imgWrapper.focus();
         } else {
           _this.editor.body.blur();
           _this.editor.body.find('.simditor-image').removeClass('selected');
@@ -3562,18 +3721,21 @@
         if (range.collapsed && $container.is('.simditor-image')) {
           return $container.mousedown();
         } else if (_this.popover.active) {
-          if (_this.popover.active) {
-            return _this.popover.hide();
-          }
+          return _this.popover.hide();
         }
       });
       this.editor.body.on('keydown', '.simditor-image', function(e) {
+        var newBlockEl, range;
         if (e.which !== 8) {
           return;
         }
         _this.popover.hide();
-        $(e.currentTarget).remove();
+        newBlockEl = $('<p/>').append(_this.editor.util.phBr);
+        $(e.currentTarget).replaceWith(newBlockEl);
+        range = document.createRange();
+        _this.editor.selection.setRangeAtStartOf(newBlockEl, range);
         _this.editor.trigger('valuechanged');
+        _this.editor.trigger('selectionchanged');
         return false;
       });
     }
@@ -3685,7 +3847,8 @@
         return _this.loadImage($img, result.file_path, function() {
           file.imgWrapper.find(".mask, .simditor-image-progress").remove();
           _this.popover.srcEl.val(result.file_path);
-          return _this.editor.trigger('valuechanged');
+          _this.editor.trigger('valuechanged');
+          return _this.editor.uploader.trigger('uploadready', [file, result]);
         });
       });
       return this.editor.uploader.on('uploaderror', function(e, file, xhr) {
@@ -3749,7 +3912,7 @@
       if ($wrapper.length < 1) {
         return;
       }
-      if (!/^data:image\/png;base64/.test($img.attr('src'))) {
+      if (!/^data:image/.test($img.attr('src'))) {
         $('<p/>').append($img).insertAfter($wrapper);
       }
       return $wrapper.remove();
@@ -3776,9 +3939,9 @@
           src: src,
           width: width,
           height: height,
-          'data-origin-src': src,
-          'data-origin-name': '图片',
-          'data-origin-size': img.width + ',' + img.height
+          'data-image-src': src,
+          'data-image-name': '图片',
+          'data-image-size': img.width + ',' + img.height
         });
         $wrapper.width(width).height(height);
         return callback(true);
@@ -3826,11 +3989,11 @@
       return $img;
     };
 
-    ImageButton.prototype.command = function() {
+    ImageButton.prototype.command = function(src) {
       var $img,
         _this = this;
       $img = this.createImage();
-      return this.loadImage($img, this.defaultImage, function() {
+      return this.loadImage($img, src || this.defaultImage, function() {
         _this.editor.trigger('valuechanged');
         $img.mousedown();
         return _this.popover.one('popovershow', function() {
@@ -3892,6 +4055,11 @@
           return _this.hide();
         }
       });
+      this.editor.on('valuechanged', function(e) {
+        if (_this.active) {
+          return _this.refresh();
+        }
+      });
       return this._initUploader();
     };
 
@@ -3940,8 +4108,8 @@
     __extends(IndentButton, _super);
 
     function IndentButton() {
-      _ref15 = IndentButton.__super__.constructor.apply(this, arguments);
-      return _ref15;
+      _ref14 = IndentButton.__super__.constructor.apply(this, arguments);
+      return _ref14;
     }
 
     IndentButton.prototype.name = 'indent';
@@ -3968,8 +4136,8 @@
     __extends(OutdentButton, _super);
 
     function OutdentButton() {
-      _ref16 = OutdentButton.__super__.constructor.apply(this, arguments);
-      return _ref16;
+      _ref15 = OutdentButton.__super__.constructor.apply(this, arguments);
+      return _ref15;
     }
 
     OutdentButton.prototype.name = 'outdent';
@@ -3996,8 +4164,8 @@
     __extends(HrButton, _super);
 
     function HrButton() {
-      _ref17 = HrButton.__super__.constructor.apply(this, arguments);
-      return _ref17;
+      _ref16 = HrButton.__super__.constructor.apply(this, arguments);
+      return _ref16;
     }
 
     HrButton.prototype.name = 'hr';
@@ -4133,7 +4301,7 @@
       }
       $resizeHandle = $('<div class="simditor-resize-handle" contenteditable="false"></div>').appendTo($wrapper);
       $wrapper.on('mousemove', 'td', function(e) {
-        var $col, $td, index, x, _ref18, _ref19;
+        var $col, $td, index, x, _ref17, _ref18;
         if ($wrapper.hasClass('resizing')) {
           return;
         }
@@ -4146,13 +4314,13 @@
           $resizeHandle.hide();
           return;
         }
-        if ((_ref18 = $resizeHandle.data('td')) != null ? _ref18.is($td) : void 0) {
+        if ((_ref17 = $resizeHandle.data('td')) != null ? _ref17.is($td) : void 0) {
           $resizeHandle.show();
           return;
         }
         index = $td.parent().find('td').index($td);
         $col = $colgroup.find('col').eq(index);
-        if ((_ref19 = $resizeHandle.data('col')) != null ? _ref19.is($col) : void 0) {
+        if ((_ref18 = $resizeHandle.data('col')) != null ? _ref18.is($col) : void 0) {
           $resizeHandle.show();
           return;
         }
@@ -4431,8 +4599,8 @@
     __extends(StrikethroughButton, _super);
 
     function StrikethroughButton() {
-      _ref18 = StrikethroughButton.__super__.constructor.apply(this, arguments);
-      return _ref18;
+      _ref17 = StrikethroughButton.__super__.constructor.apply(this, arguments);
+      return _ref17;
     }
 
     StrikethroughButton.prototype.name = 'strikethrough';
