@@ -28,9 +28,18 @@ angular.module('BHF')
                         title: $scope.issue_textarea,
                         tag: $scope.tag||$scope.router.tag
                     }
-                    data = angular.extend(issue_obj,data);
-                    var method = data.id ? 'PUT' :'POST'
-                    API.doAction(api, data, method, function(data){
+                    var _data = angular.extend({},data);
+                    for(var x in issue_obj){
+                        angular.extend(_data,issue_obj);
+                        angular.extend(_data,{
+                            title: $scope.issue_textarea,
+                            tag: $scope.tag||$scope.router.tag
+                        })
+                        break;
+                    }                 
+
+                    var method = _data.id ? 'PUT' :'POST'
+                    API.doAction(api, _data, method, function(data){
                         $scope.$emit('issue:save')
                         reset_edit();
                     })
@@ -46,6 +55,8 @@ angular.module('BHF')
                     $scope.new_issue_btn = "保存任务";
                     $scope.issue_textarea = data.title;
                     issue_obj = data;
+                    console.log("fill is")
+                    console.log(issue_obj)
                 })
 
                 $scope.enterSubmit = function(e){
