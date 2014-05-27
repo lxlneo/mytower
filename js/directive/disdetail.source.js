@@ -33,7 +33,6 @@ angular.module('BHF')
                         return;
                     }
                     var url = "project/" + $scope.project_id + "/issue";
-
                     API.doAction(url, data, "POST", function (data) {
                         if(data.id) {
                             $rootScope.$broadcast('discusslist:update');

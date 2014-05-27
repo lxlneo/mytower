@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module("BHF", ["ngRoute","ngCookies", "angularFileUpload"])
+angular.module("BHF", ["ngRoute", "angularFileUpload"])
     .config(function($routeProvider, $httpProvider){
         $routeProvider
             .when('/index', {
@@ -10,6 +10,10 @@ angular.module("BHF", ["ngRoute","ngCookies", "angularFileUpload"])
             .when('/addpro', {
                 templateUrl: "views/addpro.html",
                 controller: "C_addpro"
+            })
+            .when('/editpro/:project_id',{
+                templateUrl:"views/addpro.html",
+                controller:"C_addpro"
             })
             .when('/project/:project_id', {
                 templateUrl: "views/project.html",

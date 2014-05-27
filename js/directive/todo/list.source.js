@@ -8,7 +8,8 @@ angular.module('BHF')
             replace: true,
             link: function ($scope) {
                 function refresh(){
-                    $scope.tags = ['bug', '需求', '支持', '功能'];
+                   // $scope.tags = ['bug', '需求', '支持', '功能'];
+                    $scope.tags = ['bug', '需求'];
                 }
                 refresh();
                 /*
