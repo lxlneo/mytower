@@ -11,7 +11,7 @@
             <span class="message-content" ng-bind-html="tohtml(item.content)"></span>
         </a>
         <span class="time">{{item.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span>
-        <a data-stack="" href="" class="comments-count"> 1</a>
+        <a data-stack="" href="" class="comments-count">{{item.comment_count}}</a>
     </div>
     <div class="more" ng-show="show_dis_more">
         <a href="#/project/{{project_id}}/disfulllist" class="link-more-topics" data-stack="">全部{{data.pagination.count}}条讨论</a>
