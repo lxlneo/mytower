@@ -1,4 +1,4 @@
 <a class="label todo-assign-due" ng-click="setowner_and_due($event)">
     <span class="assignee">{{item.owner_name || '未指定'}}</span>
-    <span class="due">{{item.plan_finish_time | date: 'yyyy-MM-dd'}}</span>
+    <span class="due" ng-show='item.plan_finish_time'>{{item.plan_finish_time | date: 'yyyy-MM-dd'}}</span>
 </a>
