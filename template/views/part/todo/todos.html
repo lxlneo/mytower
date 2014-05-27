@@ -11,6 +11,7 @@
             <a href="#/project/{{item.project_id}}/issue/{{item.id}}">{{item.title}}</a>
          </span>
             <assigneeshow></assigneeshow>
+            <span class="label-success" ng-show='item.finish_time'>{{item.finish_time | date:'yyyy-MM-dd'}}</span>
         </div>
     </li>
     <li ng-show="data.items.length == 0" class="todo">
