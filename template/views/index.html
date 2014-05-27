@@ -6,6 +6,7 @@
             <a title="{{pro.title}}" href="#/project/{{pro.id}}" class="folder c2 i1">
                 <span class="badge"></span>
                 <i class="badge-edit del" title="删除项目" data-pid="{{pro.id}}" ng-click="delproject($event)"></i>
+                <i class="badge-edit edit" title="编辑项目" data-pid="{{pro.id}}" ng-click="editproject($event)"></i>   
             </a>
             <h6 class="name">
                 <a title="{{pro.name}}" data-stack="" data-stack-root="" data-restore-position="" href="＃">{{pro.title}}</a>

@@ -19,17 +19,20 @@ angular.module('BHF')
                     }
                     pro.contact = $scope.projectcontact;
                     if ("" == pro.contact || undefined == pro.contact) {
-                        alert("联系人是必填的.");
+                    //    alert("联系人是必填的.");
+                        pro.contact = "";
                         return;
                     }
                     pro.description = $scope.projectdesc;
                     if ("" == pro.description || undefined == pro.description) {
-                        alert("描述是必填的.");
+                        //alert("描述是必填的.");
+                        pro.description = "";
                         return;
                     }
                     pro.repos = $scope.projectrepos;
                     if ("" == pro.repos || undefined == pro.repos) {
-                        alert("gitlab地址是必填的.");
+                        //alert("gitlab地址是必填的.");
+                        pro.repos = "";
                         return;
                     }
 

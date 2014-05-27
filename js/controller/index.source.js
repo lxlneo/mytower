@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .controller('C_index', function ($scope, API,USER) {
+    .controller('C_index', function ($scope,$location, API,USER) {
         function getprolist(){
             API.doAction("project", {}, function (data) {
                 $scope.prolist = data.items;
@@ -27,5 +27,12 @@ angular.module('BHF')
                     getprolist();
                 })
             }
+        }
+
+        $scope.editproject = function($event){
+            $event.preventDefault();
+            var project_id = $($event.target).data('pid');
+            var _project_id = parseInt(project_id,10);
+            $location.path('/editpro/'+_project_id)
         }
     })
