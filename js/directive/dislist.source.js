@@ -24,7 +24,7 @@ angular.module('BHF')
                 });
 
                 $scope.tohtml = function(str){
-                   return $sce.trustAsHtml(str);
+                   return $sce.trustAsHtml($(str).text().substr(0,200));
                 }
             }
         }
