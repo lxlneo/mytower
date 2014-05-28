@@ -9,7 +9,7 @@ angular.module('BHF')
             link: function ($scope, $routeParams) {
                 var api = 'project/' + ($scope.project_id || $scope.router.project_id)
 
-                var pageSize = $scope.allCommit ? 25 : 5
+                var pageSize = $scope.allCommit ? 20 : 5
                 var cond = {pageSize: pageSize}
                 if($scope.router.issue_id){
                     cond.pageSize = 9999

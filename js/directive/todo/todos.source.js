@@ -11,7 +11,7 @@ angular.module('BHF')
                 var loadIssue = function(_data){
                     var url = 'project/' + $scope.router.project_id + '/issue'
                     var data = {
-                        status: void(0),
+                        status: 'undone',
                         pageSize: 4,
                         tag: $scope.tag||$scope.router.tag
                     }
