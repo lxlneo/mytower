@@ -29,10 +29,14 @@ angular.module('BHF')
                     }
                 })
 
-                $scope.$on('filter:init',function(){
+                $scope.$on('filter:init',function(e,_data){
                     var data = {
                         tag:$scope.filter_tag,
                         status:$scope.filter_status
+                    }
+                    if(_data){
+                        angular.extend(data,_data);
+                       //console.log('filter accept data is ',_data)
                     }
                     $scope.$emit("issue:filter",data);
                 })
