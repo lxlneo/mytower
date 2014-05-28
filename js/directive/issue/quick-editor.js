@@ -55,8 +55,6 @@ angular.module('BHF')
                     $scope.new_issue_btn = "保存任务";
                     $scope.issue_textarea = data.title;
                     issue_obj = data;
-                    console.log("fill is")
-                    console.log(issue_obj)
                 })
 
                 $scope.enterSubmit = function(e){

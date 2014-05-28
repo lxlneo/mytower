@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module('BHF')
-    .controller('C_dis_single_page', function ($scope, $routeParams, $rootScope, API,$sce) {
+    .controller('C_dis_single_page', function ($scope, $routeParams, $rootScope,API,USER,$sce) {
         var params = $routeParams;
         $rootScope.project_id = params.project_id;
         $rootScope.router = $routeParams
@@ -39,4 +39,8 @@ angular.module('BHF')
         $scope.tohtml = function(str){
            return $sce.trustAsHtml(str);
         }
+
+        USER.getUser(function(user){
+            $scope.user = user;
+        });
     })
