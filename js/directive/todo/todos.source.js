@@ -9,7 +9,6 @@ angular.module('BHF')
             link: function ($scope, $element) {
                 $scope.showform = false;
                 var loadIssue = function(_data){
-                    console.log("loadIssue is", _data);
                     var url = 'project/' + $scope.router.project_id + '/issue'
                     var data = {
                         status: void(0),
@@ -18,7 +17,6 @@ angular.module('BHF')
                     }
 
                     data = angular.extend(data,_data);
-                    console.log("sent data is",data)
                     API.doAction(url, data, function(result){
                         $scope.data = result;
                         $scope.$broadcast('pagination:do',result.pagination);//触发分页

@@ -16,7 +16,6 @@ angular.module('BHF')
         })
 
         $scope.$on('pagination:do',function(e,data){
-            console.log('pagination:do is',data,"\n====");
             $scope.pager = data;
         })
 
@@ -24,10 +23,8 @@ angular.module('BHF')
             return new Array(num);   
         }
         $scope.gotoPage = function(pageIndex){
-            console.log('go to ' + pageIndex);
             var pager = angular.extend({},$scope.pager);
             pager.pageIndex = pageIndex;
-            console.log('send by event is',pager)
             delete(pager.offset);
             $scope.$broadcast("filter:init", pager);
         }

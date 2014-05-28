@@ -9,10 +9,10 @@ angular.module('BHF')
             link: function ($scope, $routeParams) {
                 var api = 'project/' + ($scope.project_id || $scope.router.project_id)
 
-                var limit = $scope.allCommit ? 50 : 5
-                var cond = {limit: limit}
+                var pageSize = $scope.allCommit ? 25 : 5
+                var cond = {pageSize: pageSize}
                 if($scope.router.issue_id){
-                    cond.limit = 9999
+                    cond.pageSize = 9999
                     api += '/issue/' + $scope.router.issue_id
                 }else{
 
@@ -21,7 +21,19 @@ angular.module('BHF')
                 api += '/commit';
 
                 API.doAction(api, cond, function(data){
+                    delete(data.pagination.limit);
                     $scope.commitList = data;
+                    $scope.$broadcast('pagination:do',data.pagination)
+                })
+
+                $scope.$on('commit:refresh',function(e,data){
+                    angular.extend(data,cond)
+                    API.doAction(api, data, function(result){
+                        $scope.commitList = result;
+                        delete(result.pagination.limit);
+                        $scope.$broadcast('pagination:do',result.pagination)
+                    })
+
                 })
             }
         }

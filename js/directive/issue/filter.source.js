@@ -36,7 +36,6 @@ angular.module('BHF')
                     }
                     if(_data){
                         angular.extend(data,_data);
-                       //console.log('filter accept data is ',_data)
                     }
                     $scope.$emit("issue:filter",data);
                 })
