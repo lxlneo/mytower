@@ -40,7 +40,7 @@
                             <th>任务数</th>
                             <th>已完成</th>
                             <th style="color: red;">延误</th>
-                            <th style="color: red;" title = {{contributeTotal}}>贡献(%)</th>
+                            <th style="color: red;" title = "{{contributeTotal}}">贡献(%)</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -62,8 +62,11 @@
                             <td style="color: red;">
                                 {{item.stat.delay}}
                             </td>
-                            <td style="color: red;" title="{{item.stat.contribute}}">
-                                {{item.stat.contributePercent}}
+                            <td style="color: red;" title="{{item.stat.contribute}}-{{item.stat.contributePercent}}">
+                                <div class="contribute-star">
+                                    <div class="contirbute-current-star" style="width:{{item.stat.rating}}%">
+                                </div>
+                               
                             </td>
                         </tr>
                         </tbody>
