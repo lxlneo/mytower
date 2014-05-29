@@ -11,7 +11,7 @@ angular.module('BHF')
         })
         $scope.filter_tag = $scope.router.tag;
         $scope.$on("issue:filter", function (evnet,data) {
-            data.pageSize = 10;
+            data.pageSize = 20;
             $scope.$broadcast("issue:refresh", data);
         })
 
