@@ -23,10 +23,11 @@ angular.module('BHF')
                 API.doAction(api, cond, function(data){
                     delete(data.pagination.limit);
                     $scope.commitList = data;
-                    $scope.$broadcast('pagination:do',data.pagination)
+                    $scope.$broadcast('pagination:do',data.pagination);
+                    console.log('pagination:do send ', data.pagination);
                 })
 
-                $scope.$on('commit:refresh',function(e,data){
+                $scope.$on('pagination:goto',function(e,data){
                     angular.extend(data,cond)
                     API.doAction(api, data, function(result){
                         $scope.commitList = result;
