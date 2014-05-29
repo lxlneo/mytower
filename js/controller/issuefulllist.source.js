@@ -15,20 +15,7 @@ angular.module('BHF')
             $scope.$broadcast("issue:refresh", data);
         })
 
-        $scope.$on('pagination:do',function(e,data){
-            $scope.pager = data;
-        })
-
-        $scope.getNumber = function(num) {
-            return new Array(num);   
-        }
-        $scope.gotoPage = function(pageIndex){
-            var pager = angular.extend({},$scope.pager);
-            pager.pageIndex = pageIndex;
-            delete(pager.offset);
+        $scope.$on('pagination:goto',function(e,pager){
             $scope.$broadcast("filter:init", pager);
-        }
-        $scope.equals = function(o1,o2){
-            return angular.equals(o1,o2);
-        }
+        });
     })
