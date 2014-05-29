@@ -1,5 +1,9 @@
+<div align="center">
 <ul class="pagination" ng-show="pager.recordCount && pager.pageCount > 1">
     <li ng-click='gotoPage(1)'><a href=""><<</a></li>
-    <li ng-repeat="i in getNumber(pager.pageCount) track by $index" ng-click="gotoPage($index+1)" ng-class="{active:equals($index+1, pager.pageIndex)}"><a href="">{{$index+1}}</a></li>
+    
+    <li ng-repeat="i in pager.pageNumber track by $index" ng-click="gotoPage(i)" ng-class="{active:equals(i, pager.pageIndex)}"><a href="">{{i}}</a></li>
+
     <li ng-click='gotoPage(pager.pageCount)'><a href="">>></a></li>
 </ul>
+</div>
