@@ -1,7 +1,7 @@
 <div class="form-todo-edit-body" ng-show='item.editstatus'>
-    <textarea class="todo-edit-content" placeholder="任务" ng-model="item.title"></textarea>
+    <textarea class="todo-edit-content" placeholder="任务" ng-model="item.title" ng-keypress="enterSubmit($event)"></textarea>
     <div class="buttons create-buttons">
         <button type="submit" class="btn btn-primary btn-create-todo" data-disable-with="正在保存..." ng-click="submit()" ng-disabled="item.submitenable">保存</button>
-        <button class="btn btn-cancel-todo" ng-click="cancel()">取消</button>
+        <a class="btn-cancel-todo" ng-click="cancel()">取消</a>
     </div>  
 </div>

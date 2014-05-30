@@ -6,11 +6,7 @@ angular.module('BHF')
             replace: true,
             link: function ($scope) {
                 var oriValue = $scope.item.title;
-                $scope.cancel = function(){
-                	$scope.item.title = oriValue;
-                	$scope.item.editstatus = false;
-                }
-                $scope.submit = function(){
+                var submit = function(){
                     if(!$scope.item.title || '' === $scope.item.title.replace(/(\ )+/g,"")) return alert('亲，太没节操了，内容必需输入哇');
                     var api = 'project/' + $scope.router.project_id + '/issue';
                     $scope.item.submitenable = true;
@@ -22,6 +18,17 @@ angular.module('BHF')
                         $scope.item.id = issueId;
                         console.log("submit after:",$scope.item);
                     })
+                }
+                $scope.cancel = function(){
+                	$scope.item.title = oriValue;
+                	$scope.item.editstatus = false;
+                }
+                $scope.submit = submit;
+                $scope.enterSubmit = function(e){
+                    if(e.keyCode !== 13){
+                        return;
+                    }
+                    submit();
                 }
             }
         }
