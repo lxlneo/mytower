@@ -12,7 +12,7 @@ angular.module('BHF')
                     var url = 'project/' + $scope.router.project_id + '/issue'
                     var data = {
                         status: 'undone',
-                        pageSize: 4,
+                        pageSize: 9999,
                         tag: $scope.tag||$scope.router.tag
                     }
 
