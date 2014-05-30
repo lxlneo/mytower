@@ -24,7 +24,6 @@ angular.module('BHF')
                     delete(data.pagination.limit);
                     $scope.commitList = data;
                     $scope.$broadcast('pagination:do',data.pagination);
-                    console.log('pagination:do send ', data.pagination);
                 })
 
                 $scope.$on('pagination:goto',function(e,data){

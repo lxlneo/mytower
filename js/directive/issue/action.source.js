@@ -20,7 +20,7 @@ angular.module('BHF')
 
                 // 编辑
                 function _edit() {
-                    $scope.$emit('issue:showedit',issue);
+                    $scope.item.editstatus = true;
                 }
 
                 // 删除

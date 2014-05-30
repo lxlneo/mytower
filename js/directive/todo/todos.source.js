@@ -39,10 +39,6 @@ angular.module('BHF')
                     loadIssue(data);
                 });
 
-                $scope.$on('issue:showedit',function(e,data){
-                    $scope.$broadcast('issue:filledit',data);
-                })
-
                 $scope.$broadcast('issue:save');
                 
             }
