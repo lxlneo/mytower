@@ -1,7 +1,7 @@
 <ul class="todos todos-uncompleted ui-sortable">
     <li ng-repeat="item in data.items" class="todo">
-        <todosaction></todosaction>
-        <div class="todo-wrap">
+        <todosaction ng-hide='item.editstatus'></todosaction>
+        <div class="todo-wrap" ng-hide='item.editstatus'>
             <finishtodo></finishtodo>
             <span title="状态" class="label issue-status-{{item.status}}">{{item.status}}</span>
             <span title="issueID" class="label">#{{item.id}}</span>
@@ -13,6 +13,8 @@
             <assigneeshow></assigneeshow>
             <span class="label-success" ng-show='item.finish_time'>{{item.finish_time | date:'yyyy-MM-dd'}}</span>
         </div>
+        <issue-quickeditor></issue-quickeditor>
+
     </li>
     <li ng-show="data.items.length == 0" class="todo">
         <div class="todo-wrap"> <span class="label">沒有内容</span></div>

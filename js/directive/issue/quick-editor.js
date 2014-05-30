@@ -28,18 +28,8 @@ angular.module('BHF')
                         title: $scope.issue_textarea,
                         tag: $scope.tag||$scope.router.tag
                     }
-                    var _data = angular.extend({},data);
-                    for(var x in issue_obj){
-                        angular.extend(_data,issue_obj);
-                        angular.extend(_data,{
-                            title: $scope.issue_textarea,
-                            tag: $scope.tag||$scope.router.tag
-                        })
-                        break;
-                    }                 
-
-                    var method = _data.id ? 'PUT' :'POST'
-                    API.doAction(api, _data, method, function(data){
+                    var method ='POST';
+                    API.doAction(api, data, method, function(_data){
                         $scope.$emit('issue:save')
                         reset_edit();
                     })
