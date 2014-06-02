@@ -7,6 +7,7 @@
             <div class="info" style="float: right;">
                 <a class="author" href="#">{{single_issue.realname}}</a>
                 <a class="create-time">{{single_issue.timestamp |date: 'yyyy-MM-dd hh:mm'}}</a>
+                <issue-settag></issue-settag>
             </div>
             <h3 title="{{single_issue.title}}">{{single_issue.title}}</h3>
             <div class="comment-content editor-style">
