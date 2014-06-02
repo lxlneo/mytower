@@ -5,11 +5,11 @@
             <finishtodo></finishtodo>
             <span title="状态" class="label issue-status-{{item.status}}">{{item.status}}</span>
             <span title="issueID" class="label">#{{item.id}}</span>
-        <span class="todo-content">
-            <span class="raw"></span>
-            <span>todo内容{{todo}}</span>
-            <a href="#/project/{{item.project_id}}/issue/{{item.id}}">{{item.title}}</a>
-         </span>
+            <span class="todo-content">
+                <span class="raw"></span>
+                <span>todo内容{{todo}}</span>
+                <a href="#/project/{{item.project_id}}/issue/{{item.id}}">{{item.title}}</a>
+             </span>
             <assigneeshow></assigneeshow>
             <span class="label-success" ng-show='item.finish_time'>{{item.finish_time | date:'yyyy-MM-dd'}}</span>
         </div>
