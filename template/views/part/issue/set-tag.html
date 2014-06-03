@@ -1,0 +1,10 @@
+<span>
+	<span class="topic-tag" ng-click="showIssueTag()">{{single_issue.tag}}</span>
+	<select ng-model='single_issue.tag' ng-change="updateTag()" ng-blur='cancelUpdateTag()'
+	style="display:none" class="issue-settag"
+	>
+	    <option value='project' ng-checked="'project' == single_issue.tag">project</option>
+	    <option value='bug' ng-checked="'bug' == single_issue.tag">bug</option>
+	    <option value='需求' ng-checked="'需求' == single_issue.tag"> 需求</option>
+	</select>
+</span>
