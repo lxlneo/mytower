@@ -63,6 +63,9 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
             }).when('/project/:project_id/stat', {
                 templateUrl: 'views/stat.html',
                 controller: 'C_stat'
+            }).when('/myself',{
+                templateUrl: 'views/myself.html',
+                controller:'C_myself'
             })
         $routeProvider.otherwise({      
             redirectTo: '/index'            

@@ -1,0 +1,123 @@
+<!--主体内容-->
+<div class="page sheet sheet-active sheet-root" id="page-project">
+	<div class="page-inner">
+		<!---->
+		<div class="member-info">
+			<img class="avatar" alt="{{user.username}}" src="../images/member/{{user.member_id}}.png">
+			<div class="info">
+				<h2>{{user.username}}</h2>
+				<!--
+				<p><a class="email" href="mailto:ec.huyinghuan@gmail.com" target="_blank">ec.huyinghuan@gmail.com</a></p>
+				-->
+			</div>
+		</div>
+		
+		<div class="member-nav">
+			<ul>
+				<li ng-class="{active:isShow('Tasks')}">
+					<a href="" ng-click="setView('Tasks')">任务</a>
+				</li>
+				<!--
+				<li class="">
+					<a href="">日程</a>
+				</li>
+				-->
+				<li ng-class="{active:isShow('WeekReport')}">
+					<a href="" ng-click="setView('WeekReport')">周报</a>
+				</li>
+			</ul>
+		</div>
+		<div class="todolists ui-sortable" ng-show="isShow('Tasks')">
+			<h4>
+				<a class="title">待完成任务列表</a>
+			</h4>
+			<!--任务列表 集合-->
+			<div class="todolist">
+				<ul class="todos todos-uncompleted ui-sortable">
+					<li ng-repeat="item in data.items" class="todo">
+						<todosaction ng-hide='item.editstatus'></todosaction>
+						<div class="todo-wrap" ng-hide='item.editstatus'>
+							<finishtodo></finishtodo>
+							<span title="状态" class="label issue-status-{{item.status}}">{{item.status}}</span>
+							<span title="issueID" class="label">#{{item.id}}</span>
+
+							<span class="todo-content">
+								<span class="raw"></span>
+								<span>todo内容{{todo}}</span>
+								<a href="#/project/{{item.project_id}}/issue/{{item.id}}">{{item.title}}</a>
+							 </span>
+							<a class="label todo-assign-due" ng-show='item.plan_finish_time'>
+								<span class="due" >{{item.plan_finish_time | date: 'yyyy-MM-dd'}}</span>
+							</a>
+							<a class="label" href="#/project/{{item.project_id}}">{{item.project_name}}</a>
+							<span  class="label">{{item.tag}}</span>
+						</div>
+						<issue-quickeditor></issue-quickeditor>
+
+					</li>
+					<li ng-show="data.items.length == 0" class="todo">
+						<div class="todo-wrap"> <span class="label">沒有内容</span></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div ng-show="isShow('WeekReport')">
+			<weekselector></weekselector>
+			 <div class="member-weeks">
+                <div class="member-week">
+                    <div class="member-week-content">
+                        <div class="section section-todos">
+                            <h4 class="title">本周完成任务</h4>
+                            <div class="todolist">
+                                <ul class="todos todos-completed">
+                                    <li class="todo completed" ng-repeat="issue in report.completed">
+                                        <div class="todo-wrap">
+                                            <input type="checkbox">
+                                            <span class="label">
+                                                 <span>{{issue.status}}</span>
+                                             </span>
+                                            <span class="todo-content">
+                                                <a href="#/project/{{issue.project_id}}/issue/{{issue.id}}">{{issue.title}}</a>
+                                            </span>
+                                            <span class="label completed-member">( {{item.member.realname}} <span class="completed-time" data-abstime="2014-05-09 09:26:52 +0800">{{issue.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span> )</span>
+                                            <a href="#/project/{{issue.project_id}}" class="label todo-proj" data-stack-root="true" data-stack="true" title="{{issue.project_name}}">{{issue.project_name}}</a>
+                                            <span class="label">
+                                                <span>{{issue.tag}}</span>
+                                           </span>
+                                           <span class="label">
+                                                <span>{{issue.finish_time | date:'EEEE' }}</span>
+                                           </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                         </div>
+                        <div class="section section-todos">
+                            <h4 class="title">本周未完成任务</h4>
+                            <div class="todolist">
+                                <ul class="todos todos-uncompleted">
+                                    <li class="todo uncompleted" ng-repeat="issue in report.uncompleted">
+                                        <div class="todo-wrap">
+                                            <input type="checkbox">
+                                             <span class="label">
+                                                    <span>{{issue.status}}</span>
+                                             </span>
+                                            <span class="todo-content">
+                                                <a href="#/project/{{issue.project_id}}/issue/{{issue.id}}">{{issue.title}}</a>
+                                            </span>
+                                            <span class="label completed-member">( {{item.member.realname}} <span class="completed-time" data-abstime="2014-05-09 09:26:52 +0800">{{issue.timestamp | date: 'yyyy-MM-dd hh:mm'}}</span> )</span>
+                                            <a href="#/project/{{issue.project_id}}" class="label todo-proj" data-stack-root="true" data-stack="true" title="{{issue.project_name}}">{{issue.project_name}}</a>
+                                            <span class="label">
+                                                    <span>{{issue.tag}}</span>
+                                           </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+</div>

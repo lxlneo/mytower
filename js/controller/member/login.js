@@ -32,6 +32,7 @@ angular.module('BHF')
             }else{
                 $.cookie('member_id',data.member_id, { expires: 365 });
                 $.cookie('member',data,{expires:365})
+                $.cookie('username',data.account,{expires:365})
             }
 
         }

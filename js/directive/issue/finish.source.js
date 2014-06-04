@@ -22,7 +22,6 @@ angular.module('BHF')
 
                 //更新状态
                 function _update_status(status) {
-                    console.log("do in task is" + status)
                     API.doAction('project/' + issue.project_id + '/issue/' + issue.id + '/status', {status: status}, "PUT", function (data) {     
                         $scope.$emit('issue:save');
                     });

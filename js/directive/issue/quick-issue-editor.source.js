@@ -8,7 +8,7 @@ angular.module('BHF')
                 var oriValue = $scope.item.title;
                 var submit = function(){
                     if(!$scope.item.title || '' === $scope.item.title.replace(/(\ )+/g,"")) return alert('亲，太没节操了，内容必需输入哇');
-                    var api = 'project/' + $scope.router.project_id + '/issue';
+                    var api = 'project/' + $scope.item.project_id + '/issue';
                     $scope.item.submitenable = true;
                     var issueId = $scope.item.id;
                     API.doAction(api, $scope.item, 'PUT', function(){
