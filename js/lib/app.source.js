@@ -57,7 +57,11 @@ angular.module("BHF", ["ngRoute", "angularFileUpload"])
             }).when('/member', {
                 templateUrl: 'views/part/member/list.html',
                 controller: 'C_member_list'
-            }).when('/project/:project_id/commit', {
+            }).when('/member/create',{
+                templateUrl:'views/part/member/create.html',
+                controller:'C_member_create'
+            })
+            .when('/project/:project_id/commit', {
                 templateUrl: 'views/commit.html',
                 controller: 'C_commit'
             }).when('/project/:project_id/stat', {

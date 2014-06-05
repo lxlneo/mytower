@@ -21,7 +21,7 @@ angular.module('BHF')
 
     	var doCreate = function(){
     		$scope.title = "创建新项目";
-    		$scope.tosumbittext = "修改项目";
+    		$scope.tosumbittext = "创建项目";
     	}
 
     	if(isEdit){
