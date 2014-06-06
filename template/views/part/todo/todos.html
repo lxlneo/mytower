@@ -5,7 +5,7 @@
             <finishtodo></finishtodo>
             <span title="状态" class="label issue-status-{{item.status}}" ng-show="item.status != 'new'">{{item.status}}</span>
             <span title="issueID" class="label">#{{item.id}}</span>
-            <span class="todo-content">
+            <span class="todo-content"  ng-class="{taskistimeout:isTaskTimeout(item.plan_finish_time)}">
                 <span class="raw"></span>
                 <span>todo内容{{todo}}</span>
                 <a href="#/project/{{item.project_id}}/issue/{{item.id}}">{{item.title}}</a>

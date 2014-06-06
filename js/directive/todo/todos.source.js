@@ -34,13 +34,18 @@ angular.module('BHF')
                     }
                 })
 
+                $scope.isTaskTimeout  = function(time){
+                    if(typeof time !== 'number'){
+                        return false;
+                    }
+                    return time < new Date().getTime();
+                }
                 //issue refresh
                 $scope.$on('issue:refresh',function(event,data){
                     loadIssue(data);
                 });
 
                 $scope.$broadcast('issue:save');
-                
             }
         }
     })
