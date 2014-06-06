@@ -1,0 +1,57 @@
+<div class="container workspace">
+<div class="page sheet sheet-active sheet-root">
+	<div class="page-inner">
+		<h3>添加成员</h3>
+		<form class="form form-invite">
+			<div class="form-item">
+				<label class="form-label" id="label-email">输入他的账户信息</label>
+				<span class="tips-helper">
+					<span class="mark">?</span>
+					<span class="tips-pop">
+						管理员：可以管理项目、邀请成员；<br>
+						成员：一般成员，可以看到完整的成员列表；<br>
+						访客：只可以看到和他在同一个项目里的成员。<br>
+						<!--
+						<a class="more" href="/help/faq/wo_shi_guan_li_yuan/tower_ge_jiao_se_de_quan_xian_you_na_xie_cha_yi_dian" target="_blank">更详细的介绍</a>
+						-->
+					</span>
+				</span>
+				<div class="form-field">
+					<div class="invite-item">
+						<div class="invite-field">
+						<label for="">姓名：</label><input type="text" class="invite-comment no-border" placeholder="添加成员姓名(账户名)">
+						<label for="">密码：</label><input type="password" value="888888" class="invite-comment no-border" placeholder="密码（不填则默认6个8）">
+						<label for="">邮箱：</label><br><input type="email" class="invite-email no-border" placeholder="成员联系使用邮箱">
+						</div>
+						<label for="">git邮箱：</label><br><input type="email"  class="invite-email no-border" placeholder="git提交邮箱(多个用' ,'隔开)">
+						</div>
+					</div>
+					<div class="invite-role-field">
+						<label for="">角色 : </label>
+						<select class="invite-role">
+							<option value="0" selected="">成员</option>
+							<option value="1">管理员</option>
+							<option value="3">访客</option>
+						</select>
+					</div>
+					<!--
+					<p class="add-invite-wrap"><a href="javascript:;" id="add-invite-item">再加一个</a></p>-->
+				</div>
+				<!--
+				<div class="form-item proj-in">
+					<label class="form-label">选择他们能够参与的项目<span class="select-all">[ <a href="#" class="select-all-proj">全选</a> | <a class="select-none-proj" href="#">全不选</a> ]</span></label>
+					<div class="form-field">
+						<label title="熟悉Tower" class="welcome"><input type="checkbox" name="init-projects[]" value="e8e81af677b546aebc71f96a138407cb" checked=""> 熟悉Tower</label>
+						<label title="个人"><input type="checkbox" name="init-projects[]" value="7df7c0ef17b2402b8e6c0fa0cad4206e" checked=""> 个人</label>
+					</div>
+				</div>
+				-->
+				<div class="form-buttons">
+					<button type="submit" class="btn btn-primary" id="btn-invite" data-disable-with="正在邀请..." data-success-text="邀请成功" >添加</button>
+					<a class="btn btn-x" href="#/member" data-stack="" data-stack-bare="" data-stack-root="">取消，并返回团队页面</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+</div>
